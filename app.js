@@ -2,9 +2,13 @@
 const express = require('express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+//local modules
+const sequelize = require('./util/database');
+const associations = require('./util/associations');
 
-
+require('dotenv').config();
 const app = express();
+let port = process.env.PORT || 9000;
 
 //configurations for swagger
 const swaggerOptions = {
@@ -31,7 +35,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 
+associations();
 
-
-
-app.listen(3000);
+sequelize
+    .sync()
+    .then(() => {
+        app.listen(port);
+    })
+    .catch(err => {
+        console.log(err);
+    })
