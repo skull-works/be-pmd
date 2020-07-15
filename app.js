@@ -4,14 +4,17 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
 //local modules
-const sequelize = require('./util/database');
 const associations = require('./util/associations');
+const server = require('./util/server');
 //routes
 const applicationRoutes = require('./routes/application');
+
 
 require('dotenv').config();
 const app = express();
 let port = process.env.PORT || 9000;
+
+
 
 //configurations for swagger
 const swaggerOptions = {
@@ -42,17 +45,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(applicationRoutes);
 
 
-
-
 associations();
 
-sequelize
-    .sync()
-    .then(() => {
-        app.listen(port, () => {
-            console.log(`server listen to port ${port}`);
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    })
+
+server(port);
