@@ -3,9 +3,10 @@ const express = require('express');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 //local modules
 const associations = require('./util/associations');
-const server = require('./util/server');
+const sequelize = require('./util/database');
 //routes
 const applicationRoutes = require('./routes/application');
 
@@ -37,6 +38,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //middleware setup
 app.use(express.json());
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
@@ -44,8 +46,22 @@ app.use(bodyParser.urlencoded({extended: false}));
 //middleware routes
 app.use(applicationRoutes);
 
+app.use((err, req, res, next) => {
+    res.send(JSON.stringify(err));
+})
+
 
 associations();
 
 
-server(port);
+sequelize
+.sync()
+// .sync({force:true})
+.then(() => {
+    app.listen(port, () => {
+        console.log(`server listen to port ${port}`);
+    });
+})
+.catch(err => {
+    console.log(err);
+})

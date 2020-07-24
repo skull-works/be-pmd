@@ -21,7 +21,7 @@ const Customer = sequelize.define('customer', {
         allowNull: false
     },
     birth_date: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
     },
     age: Sequelize.INTEGER,
@@ -37,18 +37,8 @@ const Customer = sequelize.define('customer', {
     length_of_stay: Sequelize.STRING(30),
     occupation: Sequelize.STRING(30),
     civil_status: Sequelize.CHAR,
-    Sfirst_name: Sequelize.STRING(30),
-    Slast_name: Sequelize.STRING(30),
-    Sbirth_date: Sequelize.DATE,
-    Sstreet_address: Sequelize.STRING(30),
-    Sbarangay: Sequelize.STRING(30),
-    Scity: Sequelize.STRING(30),
-    Sprovince: Sequelize.STRING(30),
-    Sreligion: Sequelize.STRING(30),
-    Ssource_of_income: Sequelize.STRING(30),
-    Snationality: Sequelize.STRING(30),
-    Scontact_no: Sequelize.STRING(20),
     no_of_applications: Sequelize.INTEGER
 });
+
 
 module.exports = Customer;

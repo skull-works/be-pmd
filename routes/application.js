@@ -1,6 +1,13 @@
+//npm packages
 const express = require('express');
-const router = express.Router();
+//controllers
 const applicationController = require('../controllers/application');
+//validations
+const applicationValidator = require('../validation/application');
+//errors
+const Errors = require('../errors/errors');
+//initialize express router
+const router = express.Router();
 
 
 
@@ -18,6 +25,92 @@ const applicationController = require('../controllers/application');
  *                      '201':      
  *                          description: Customer created successfuly
  */
-router.post('/application_form', applicationController.postAddApplication);
+router.post(
+    '/application_form',
+    applicationValidator.appPostAreaCode,
+    applicationValidator.appNamesInput,
+    applicationValidator.appApplicationInput,
+    applicationValidator.appCustomerInput,
+    applicationValidator.appSpouseInput,   
+    Errors.errorValidation,
+    applicationController.postAddApplication);
+
+
+/**
+ * @swagger
+ * /application_form/:{inputs}:
+ *                get:
+ *                  parameters:
+ *                      - name: inputs
+ *                        description: input parameter to use to get application data
+ *                        in: parameters
+ *                        required: true
+ *                  description: request to get application data
+ *                  responses:
+ *                      '202':
+ *                          description: Data successfuly fetched
+ *                  
+ */
+router.get(
+    '/application_form/:inputs',
+    applicationValidator.jsonParse,
+    applicationValidator.appGetApplicationInput,
+    Errors.errorValidation,
+    applicationController.getApplications);
+
+/**
+ * @swagger
+ * /application_form-details/{area_code}/{formId}:
+ *                 get:
+ *                   parameters:
+ *                     - name: area_code
+ *                       description: area id of customer of application
+ *                       in: parameters
+ *                       required: true
+ *                     - name: formId
+ *                       description: id of application
+ *                       in: parameters
+ *                       required: true
+ *                   description: request to get application details 
+ *                   responses:
+ *                      '202': 
+ *                          description: Data successfuly fetched
+ */
+router.get(
+    '/application_form-details/:area_code/:formId',
+    applicationValidator.getApplicationInputDetails,
+    Errors.errorValidation,
+    applicationController.getApplicationDetails);
+
+
+ /**
+  * @swagger
+  * /application_form:
+  *                 put:
+  *                   parameters:
+  *                     - name: formId
+  *                       description: id of application
+  *                       in: body
+  *                       required: true
+  *                     - name: fieldName
+  *                       description: field to be updated
+  *                       in: body
+  *                       required: true
+  *                     - name: fieldValue
+  *                       description: new value of field
+  *                       in: body
+  *                       required: true
+  *                   description: request to update existing application
+  *                   responses:
+  *                     '202':
+  *                         description: updated successfuly
+  */   
+router.put(
+    '/application_form',
+    applicationValidator.getApplicationInputUpdate,
+    Errors.errorValidation,
+    applicationController.updateApplication
+);
+
 
 module.exports = router;
