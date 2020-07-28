@@ -45,3 +45,6 @@ app.use(applicationRoutes);
 app.use((err, req, res, next) => {
     res.send(JSON.stringify(err));
 })
+
+
+module.exports = app;

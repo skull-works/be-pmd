@@ -114,14 +114,20 @@ exports.getApplicationDetails = (req,res,next) => {
             attributes: {exclude:['area_code','first_name','last_name','interest_amount','createdBy','createdAt','updatedAt','customerId']},
             where:{id: req.params.formId, customerId: customer.id}});
     })
-    .then(application => {
+    .then(async (application) => {
         data.application = {...application.dataValues};
         if(data.customer.civil_status === 'M')
-            return data.customer.getSpouse({attributes:{exclude:['createdAt','updatedAt','customerId']}});
+            data.spouse = await Spouse.findOne({
+                attributes:{
+                    exclude:['createdAt','updatedAt','customerId']},
+                where:{
+                    customerId: data.customer.id
+                }
+             });
         return;
     })
     .then(jsondata => {
-        data.spouse = jsondata?{...jsondata.dataValues}:false;
+        console.log('asdasd');
         res.send(JSON.stringify(data));
     })
     .catch(err => {
