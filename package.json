@@ -6,7 +6,9 @@
   "scripts": {
     "start": "nodemon app.js",
     "test": "env-cmd ./config/test.env jest --detectOpenHandles",
-    "dev": "env-cmd ./config/dev.env nodemon"
+    "dev": "env-cmd ./config/dev.env nodemon",
+    "test-sync": "env-cmd ./config/test.env ./util/sync.js",
+    "dev-sync": "env-cmd ./config/dev.env ./util.sync.js"
   },
   "author": "Marco Butalid",
   "license": "ISC",
