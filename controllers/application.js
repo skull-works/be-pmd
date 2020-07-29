@@ -12,47 +12,36 @@ const CalculateLoan = require('../operations/application');
 
 
 
-exports.postAddApplication = (req,res,next) => {
+exports.postAddApplication = async (req,res,next) => {
     let body = req.body;
+    let customer,data = {};
+    let paybases = await Paybases.findAll({where:{pay_type: body.pay_type}});
+    if(paybases.length === 0)
+        Errors.standardError('Paybases', 'Paybases not Found');
 
-    Paybases.findAll({where:{pay_type: body.pay_type}})
-    .then(paybases => {
-        if(paybases.length === 0){
-            Errors.standardError('Paybases', 'Paybases not Found');
-        }
+    body.interest_amount = (body.amount_loan * paybases[0].interest_rate) * (body.mnths_to_pay?body.mnths_to_pay:1) ;
+    body.interest_amount = body.interest_amount.toFixed(2);
+    body.total = (+body.interest_amount + +body.amount_loan).toFixed(2);
 
-        body.interest_amount = (body.amount_loan * paybases[0].interest_rate) * (body.mnths_to_pay?body.mnths_to_pay:1) ;
-        body.interest_amount = body.interest_amount.toFixed(2);
-        body.total = (+body.interest_amount + +body.amount_loan).toFixed(2);
-
-        if(body.type_loan === 'NEW'){
-            body.no_of_applications = 1;
-            return Customer.create(body)
-        }
-        return Customer.findAll({where: {area_code: body.area_code}})
-        .then(customers => {
-            let customer = customers[0];
-            customer.no_of_applications += 1;
-            return  customer.save();
-        })
-    })
-    .then(customer => {
-        if(body.civil_status){
-            if(body.civil_status === 'M'){
-                customer.createSpouse(body)
-            }
-        }
-        return customer;
-    })
-    .then(customer => {
-        return Application.cutomerAddApplication(customer,body)
-    })
+    if(body.type_loan === 'NEW'){
+        body.no_of_applications = 1;
+        data.customer = customer = await Customer.create(body);
+    }else{
+        data.customer = customer = await Customer.findOne({where: {area_code: body.area_code}})
+        customer.no_of_applications += 1;
+        customer.save();
+    }
+    if(body.civil_status === 'M')
+        data.spouse = await customer.createSpouse(body)
+    return Application.cutomerAddApplication(customer,body)
     .then(application => {
-        return res.send(JSON.stringify({
+        data.application = application;
+        return res.status(201).json({
             type: 'success', 
             subject: 'success',
             name: application.area_code,
-            message: 'Application added succesfuly'}));
+            message: 'Application added succesfuly',
+            data: data});
     })
     .catch(err => {
         next(err);
@@ -62,33 +51,33 @@ exports.postAddApplication = (req,res,next) => {
 
 
 
-exports.getApplications = (req,res) => {
-  let inputs = req.params.inputs;
+exports.getApplications = (req,res,next) => {
+  let start_date = req.params.start_date ;
+  let end_date = req.params.end_date;
+  let inputs = req.query.inputs;
   Application.findAll({
       attributes: ['id','first_name','last_name','area_code','status','date_issued','created_by'],
       where: {
           [Op.and]:{
             date_issued:{
-                [Op.and]: {
-                    [Op.gte]: inputs.start_date,
-                    [Op.lte]: inputs.end_date
-                }},
+                [Op.between]: [start_date, end_date]
+            },
             type_loan: {
                 [Op.like]: inputs.type_loan
             },
             status: {
-                [Op.like]: inputs.status
+                [Op.like]: inputs.status || '%'
             },
             first_name: {
-                [Op.like]: inputs.first_name
+                [Op.like]: inputs.first_name || '%'
             },
             last_name: {
-                [Op.like]: inputs.last_name
+                [Op.like]: inputs.last_name || '%'
             }
           }
   }})
   .then(data => {
-      res.send(JSON.stringify(data));
+      return res.status(200).json(data);
   })    
   .catch(err => {
       next(err);
@@ -99,6 +88,7 @@ exports.getApplications = (req,res) => {
 
 
 exports.getApplicationDetails = (req,res,next) => {
+    debugger;
     let data = {};
     Customer.findOne({
         attributes: {
@@ -117,13 +107,7 @@ exports.getApplicationDetails = (req,res,next) => {
     .then(async (application) => {
         data.application = {...application.dataValues};
         if(data.customer.civil_status === 'M')
-            data.spouse = await Spouse.findOne({
-                attributes:{
-                    exclude:['createdAt','updatedAt','customerId']},
-                where:{
-                    customerId: data.customer.id
-                }
-             });
+            data.spouse = await data.customer.getSpouse();
         return;
     })
     .then(jsondata => {

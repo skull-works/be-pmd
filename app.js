@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(applicationRoutes);
 
 app.use((err, req, res, next) => {
-    res.send(JSON.stringify(err));
+    res.json(err);
 })
 
 

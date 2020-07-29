@@ -38,13 +38,20 @@ router.post(
 
 /**
  * @swagger
- * /application_form/:{inputs}:
+ * /application_form/:{start_date}/:{end_date}:
  *                get:
  *                  parameters:
- *                      - name: inputs
- *                        description: input parameter to use to get application data
+ *                      - name: start_date
+ *                        description: start_date field
  *                        in: parameters
  *                        required: true
+ *                      - name: end_date
+ *                        description: end_date field
+ *                        in: parameters
+ *                        required: true
+ *                      - name: inputs
+ *                        description: input parameter to use to get application data
+ *                        in: query
  *                  description: request to get application data
  *                  responses:
  *                      '202':
@@ -52,7 +59,8 @@ router.post(
  *                  
  */
 router.get(
-    '/application_form/:inputs',
+    '/application_form/:start_date/:end_date',
+    // '/application_form/:inputs',
     applicationValidator.jsonParse,
     applicationValidator.appGetApplicationInput,
     Errors.errorValidation,

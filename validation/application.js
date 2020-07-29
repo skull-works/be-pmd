@@ -243,7 +243,8 @@ exports.appApplicationInput = [
 
 
 exports.jsonParse = (req, res, next) => {
-        req.params.inputs = JSON.parse(req.params.inputs);
+        if(req.query.inputs)
+                req.query.inputs = JSON.parse(req.query.inputs);
         next();
 }
 
@@ -268,15 +269,17 @@ exports.appGetApplicationInput = [
                 .isString()
                 .isLength({min:6, max:10})
                 .optional(),
-        param("inputs.start_date")
+        param("start_date")
                 .isDate().withMessage('should be date'),
-        param('inputs.end_date')
+        param('end_date')
                 .isDate().withMessage('should be date')
                 .custom((value, {req}) => {
-                        req.params.inputs.type_loan  = req.params.inputs.type_loan  || '%';
-                        req.params.inputs.status     = req.params.inputs.status     || '%';
-                        req.params.inputs.first_name = req.params.inputs.first_name || '%';
-                        req.params.inputs.last_name  = req.params.inputs.last_name  || '%';
+                        console.log(req.query.inputs);
+                        req.query.inputs = req.query.inputs || {};
+                        req.query.inputs.type_loan  =  req.query.inputs.type_loan  || '%';
+                        req.query.inputs.status     =  req.query.inputs.status     || '%';
+                        req.query.inputs.first_name =  req.query.inputs.first_name || '%';
+                        req.query.inputs.last_name  =  req.query.inputs.last_name  || '%';
                         return true;
                 })
 ]

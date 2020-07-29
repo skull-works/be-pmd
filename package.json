@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
-    "test": "env-cmd ./config/test.env jest --detectOpenHandles",
+    "test-debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
+    "test": "env-cmd ./config/test.env jest --detectOpenHandles --coverage --watch",
     "dev": "env-cmd ./config/dev.env nodemon",
     "test-sync": "env-cmd ./config/test.env node ./util/sync.js",
-    "dev-sync": "env-cmd ./config/dev.env  node ./util.sync.js"
+    "dev-sync": "env-cmd ./config/dev.env  node ./util/sync.js"
   },
   "author": "Marco Butalid",
   "license": "ISC",
@@ -28,5 +29,15 @@
     "jest": "^26.1.0",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
+  },
+  "jest":{
+    "collectCoverage": true,
+    "coverageReporters": ["lcov"],
+    "coverageDirectory": "./output/code-coverage/",
+    "testEnvironment": "node",
+    "reporters":["./node_modules/jest-html-reporter"],
+    "coveragePathIgnorePatterns": [
+      "/node_modules"
+    ]
   }
 }
