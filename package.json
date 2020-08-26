@@ -11,7 +11,7 @@
     "sync": "node ./util/sync.js",
     "test-sync": "env-cmd ./config/test.env node ./util/sync.js",
     "dev-sync": "env-cmd ./config/dev.env  node ./util/sync.js",
-    "up": "docker build . -t pmdapi:latest && docker-compose up -d"
+    "up": " docker run --env HOST=host.docker.internal --env DBNAME=pmd-dev --env USER=marcoadmin0 --env PASS=marcopass0 --rm -p 9000:9000 mabutalid1/pmdapi:latest"
   },
   "author": "Marco Butalid",
   "license": "ISC",
