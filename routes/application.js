@@ -27,8 +27,8 @@ const router = express.Router();
  */
 router.post(
     '/application_form',
-    applicationValidator.appPostAreaCode,
-    applicationValidator.appNamesInput,
+    applicationValidator.appNamesCodeInput,
+    applicationValidator.appPostInputValidation,
     applicationValidator.appApplicationInput,
     applicationValidator.appCustomerInput,
     applicationValidator.appSpouseInput,   
@@ -60,7 +60,6 @@ router.post(
  */
 router.get(
     '/application_form/:start_date/:end_date',
-    // '/application_form/:inputs',
     applicationValidator.jsonParse,
     applicationValidator.appGetApplicationInput,
     Errors.errorValidation,

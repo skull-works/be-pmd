@@ -4,12 +4,14 @@
   "description": "Node PMD",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test-debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
-    "test": "env-cmd ./config/test.env jest --detectOpenHandles --coverage --watch",
+    "start": "node index.js",
+    "test": "env-cmd ./config/test.env mocha --recursive --watch --unhandled-rejections=strict",
+    "coverage": "env-cmd ./config/test.env nyc --reporter=html --reporter=text mocha --recursive --reporter min",
     "dev": "env-cmd ./config/dev.env nodemon",
+    "sync": "node ./util/sync.js",
     "test-sync": "env-cmd ./config/test.env node ./util/sync.js",
-    "dev-sync": "env-cmd ./config/dev.env  node ./util/sync.js"
+    "dev-sync": "env-cmd ./config/dev.env  node ./util/sync.js",
+    "up": "docker build . -t pmdapi:latest && docker-compose up -d"
   },
   "author": "Marco Butalid",
   "license": "ISC",
@@ -19,25 +21,21 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.6.0",
+    "iso-datestring-validator": "^2.0.5",
     "mysql2": "^2.1.0",
     "sequelize": "^6.3.0",
     "swagger-jsdoc": "^4.0.0",
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "decache": "^4.6.0",
     "env-cmd": "^8.0.2",
-    "jest": "^26.1.0",
+    "mocha": "^8.1.1",
+    "mochawesome": "^6.1.1",
+    "mochawesome-report-generator": "^5.1.0",
     "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
     "supertest": "^4.0.2"
-  },
-  "jest":{
-    "collectCoverage": true,
-    "coverageReporters": ["lcov"],
-    "coverageDirectory": "./output/code-coverage/",
-    "testEnvironment": "node",
-    "reporters":["./node_modules/jest-html-reporter"],
-    "coveragePathIgnorePatterns": [
-      "/node_modules"
-    ]
   }
 }

@@ -8,7 +8,7 @@ const Spouse = require('../models/spouse');
 //errors
 const Errors = require('../errors/errors');
 //operations
-const CalculateLoan = require('../operations/application');
+const { CalculateLoan, updateTypeBothUpdateApplication } = require('./operations/application');
 
 
 
@@ -17,7 +17,7 @@ exports.postAddApplication = async (req,res,next) => {
     let customer,data = {};
     let paybases = await Paybases.findAll({where:{pay_type: body.pay_type}});
     if(paybases.length === 0)
-        Errors.standardError('Paybases', 'Paybases not Found');
+        return Errors.standardError('Paybases', 'Paybases not Found', next);            // double check i think not necessary anymore due to input validation on pay_type
 
     body.interest_amount = (body.amount_loan * paybases[0].interest_rate) * (body.mnths_to_pay?body.mnths_to_pay:1) ;
     body.interest_amount = body.interest_amount.toFixed(2);
@@ -27,12 +27,13 @@ exports.postAddApplication = async (req,res,next) => {
         body.no_of_applications = 1;
         data.customer = customer = await Customer.create(body);
     }else{
-        data.customer = customer = await Customer.findOne({where: {area_code: body.area_code}})
+        customer = await Customer.findOne({where: {area_code: body.area_code}})
         customer.no_of_applications += 1;
-        customer.save();
+        await customer.save();
     }
-    if(body.civil_status === 'M')
-        data.spouse = await customer.createSpouse(body)
+    if(body.civil_status && body.civil_status === 'M'){
+         data.spouse = await customer.createSpouse(body)
+    }
     return Application.cutomerAddApplication(customer,body)
     .then(application => {
         data.application = application;
@@ -56,7 +57,7 @@ exports.getApplications = (req,res,next) => {
   let end_date = req.params.end_date;
   let inputs = req.query.inputs;
   Application.findAll({
-      attributes: ['id','first_name','last_name','area_code','status','date_issued','created_by'],
+      attributes: ['id','first_name','last_name','area_code','status','type_loan','date_issued','created_by'],
       where: {
           [Op.and]:{
             date_issued:{
@@ -66,17 +67,18 @@ exports.getApplications = (req,res,next) => {
                 [Op.like]: inputs.type_loan
             },
             status: {
-                [Op.like]: inputs.status || '%'
+                [Op.like]: inputs.status
             },
             first_name: {
-                [Op.like]: inputs.first_name || '%'
+                [Op.like]: inputs.first_name
             },
             last_name: {
-                [Op.like]: inputs.last_name || '%'
+                [Op.like]: inputs.last_name
             }
           }
   }})
   .then(data => {
+      data = data.length !== 0 ? data : { error: 'no data found'};
       return res.status(200).json(data);
   })    
   .catch(err => {
@@ -88,7 +90,6 @@ exports.getApplications = (req,res,next) => {
 
 
 exports.getApplicationDetails = (req,res,next) => {
-    debugger;
     let data = {};
     Customer.findOne({
         attributes: {
@@ -110,11 +111,11 @@ exports.getApplicationDetails = (req,res,next) => {
             data.spouse = await data.customer.getSpouse();
         return;
     })
-    .then(jsondata => {
-        console.log('asdasd');
-        res.send(JSON.stringify(data));
+    .then(() => {
+        return res.status(200).json(data);
     })
     .catch(err => {
+        err = { message: 'Something went wrong contact developer or No data found' };
         next(err);
     })
 };
@@ -122,8 +123,8 @@ exports.getApplicationDetails = (req,res,next) => {
 
 
 
-exports.updateApplication = (req,res,next) => {
-    let Model,Message;
+exports.updateApplication = async (req,res,next) => {
+    let Model, Message;
     let Includes = ['id',`${req.body.fieldName}`];
     switch (req.body.updateType){
         case "both":
@@ -141,37 +142,21 @@ exports.updateApplication = (req,res,next) => {
             Model = Spouse;
     }
     Model.findByPk(req.body.id, { attributes: Includes})
-    .then(data => {
+    .then(async data => {
         data[`${req.body.fieldName}`] = req.body.fieldValue;
+
         if(req.body.fieldName === 'amount_loan' || req.body.fieldName === 'pay_type')
-            return CalculateLoan(req.body, req.body.fieldName === 'amount_loan'?req.body.fieldValue:data.amount_loan, data);
-        return data.save();
-    })
-    .then(data => {
-        if(req.body.updateType === 'both'){
-            return data.getApplications({
-                attributes: ['id','area_code',`${req.body.fieldName}`]
-            })
-        }
-        Message = `${req.body.fieldName} updated successfuly`;
-        return data;
-    })
-    .then(datas => {
-        if(req.body.updateType === 'both'){
-            datas.forEach(a => {
-                let num = 0;
-                Message = Message + ` and ${++num} Applications Successfuly`;
-                a[`${req.body.fieldName}`] = req.body.fieldValue;
-                a.save();
-            })
-        }
+           data = await CalculateLoan(req.body, req.body.fieldName === 'amount_loan'?req.body.fieldValue:data.amount_loan, data);
+
+        data    = await data.save();
+        Message = await updateTypeBothUpdateApplication(data, req, Message);
         return;
     })
     .then(() => {
-        res.send(JSON.stringify({
+        return res.status(200).json({
             type: 'success', 
             message: Message
-        }))
+        });
     })
     .catch(err => {
         next(err);

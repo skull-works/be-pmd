@@ -43,7 +43,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(applicationRoutes);
 
 app.use((err, req, res, next) => {
-    res.json(err);
+    let statusCode = err.statusCode || 422;
+    res.status(statusCode).json({error:{...err}});
 })
 
 
