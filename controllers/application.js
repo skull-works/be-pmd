@@ -1,10 +1,7 @@
 //npm packages
 const { Op } = require('sequelize');
 //models
-const Application = require('../models/application');
-const Paybases = require('../models/payment_classifications');
-const Customer = require('../models/customer');
-const Spouse = require('../models/spouse');
+const { Application, Customer, Spouse, Paybases } = require('../models/index');
 //errors
 const Errors = require('../errors/errors');
 //operations

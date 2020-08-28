@@ -1,13 +1,10 @@
 //testing frameworks
 const request = require('supertest');
 const { expect } = require('chai');
-//associations & middleware
-const associations = require('../../util/associations');
+//middleware
 const app = require('../../app');
 //models
-const Application = require('../../models/application');
-const Customer = require('../../models/customer');
-const Spouse = require('../../models/spouse');
+const { Application, Customer, Spouse } = require('../../models/index');
 //data
 const data = require('./data/post-application-data');
 
@@ -15,7 +12,6 @@ const data = require('./data/post-application-data');
 describe('Suite = Post Application controller', function(){
 
       before(async function() {
-            associations();
             await Application.destroy({where:{}});
             await Spouse.destroy({where:{}});
             await Customer.destroy({where:{}});

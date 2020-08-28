@@ -1,8 +1,7 @@
 const { body, param, query } = require('express-validator');
-const Application = require('../models/application');
+const { Application } = require('../models/index');
 const { Op } = require('sequelize');
 const helper = require('./helper/helper');
-const { isValidDate } = require('iso-datestring-validator');
 
 
 const message1 = "must be atleast 4 characters long";
@@ -48,7 +47,7 @@ exports.appPostInputValidation = (req,res,next) => {
                                         location: "Post request for applictions",
                                         message: "Area code already taken by another customer, please check area code at customer list to know who uses it",
                                         statusCode: 422
-                                })
+                                });
                         }
 
                         if(applications.some(e => e.status === "PROCESSING" || e.status === "APPROVED" || e.status === "ONGOING")){

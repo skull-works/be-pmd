@@ -1,4 +1,4 @@
-const Paybases = require('../../models/payment_classifications');
+const { Paybases } = require('../../models/index');
 
 
 exports.CalculateLoan = (body, amount_loan, application) => {

@@ -3,13 +3,10 @@ const { expect } = require('chai');
 const request = require('supertest');
 //helper
 const { createData } = require('./helper/helper');
-//associations
-const associations = require('../../util/associations');
+//application
 const app = require('../../app');
 //models
-const Application = require('../../models/application');
-const Customer = require('../../models/customer');
-const Spouse = require('../../models/spouse');
+const { Application, Customer, Spouse } = require('../../models/index');
 //mockData
 const data = require('./data/general-data');
 
@@ -17,7 +14,6 @@ const data = require('./data/general-data');
 
 describe('Suite === Get Application details controller', function(){
     before(async function(){
-        associations();
         await Customer.destroy({where:{}});
         await Application.destroy({where:{}});
         await Spouse.destroy({where:{}});

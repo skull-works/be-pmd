@@ -1,8 +1,4 @@
-const sequelize = require('./database');
-const associations = require('./associations');
-const Paybases = require('../models/payment_classifications');
-
-associations();
+const { sequelize, Paybases } = require('./index');
 
 
 sequelize

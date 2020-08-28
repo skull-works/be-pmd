@@ -3,7 +3,10 @@ const { expect } = require('chai');
 //mockData
 const data = require('../data/general-data');
 //models
-const Customer = require('../../../models/customer');
+const { Customer } = require('../../../models/index');
+
+
+
 exports.assertArray = (body, field, nameExpected) => {
     for(let i=0; i < body.length ;i++){
         expect(body[i].first_name).to.eql(nameExpected[i]);

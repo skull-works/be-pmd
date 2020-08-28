@@ -3,16 +3,10 @@ const { expect } = require('chai');
 const request = require('supertest');
 //helper
 const { createData, findCustomer } = require('./helper/helper');
-//associatons & application
-const associations = require('../../util/associations');
+//application
 const app = require('../../app');
 //models
-const Application = require('../../models/application');
-const Customer = require('../../models/customer');
-const Spouse = require('../../models/spouse');
-//application operations of controller
-const operations = require('../../controllers/operations/application');
-// const decache = require('decache')
+const { Application, Customer, Spouse } = require('../../models/index');
 //mockData
 const data = require('./data/general-data');
 const updateData = require('./data/update-application');
@@ -21,7 +15,6 @@ const updateData = require('./data/update-application');
 describe('Suite = Update Application Controller', function(){
             
     before(async function(){
-        associations();
         await Customer.destroy({where:{}});
         await Application.destroy({where:{}});
         await Spouse.destroy({where:{}});

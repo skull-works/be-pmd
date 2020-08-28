@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 //routes
 const applicationRoutes = require('./routes/application');
+const passbookRoutes = require('./routes/passbook');
 
 const app = express();
 
@@ -38,9 +39,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-
 //middleware routes
 app.use(applicationRoutes);
+app.use(passbookRoutes);
+
+
 
 app.use((err, req, res, next) => {
     let statusCode = err.statusCode || 422;

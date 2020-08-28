@@ -3,13 +3,9 @@ const { expect } = require('chai');
 const request = require('supertest');
 //helper functions
 const { assertArray, createData, dateTodayPlus1 } = require('./helper/helper');
-//associations
-const associations = require('../../util/associations');
 const app = require('../../app');
 //models
-const Application = require('../../models/application');
-const Customer = require('../../models/customer');
-const Spouse = require('../../models/spouse');
+const { Application, Customer, Spouse } = require('../../models/index');
 //mockData
 const data = require('./data/general-data');
 
@@ -18,7 +14,6 @@ const data = require('./data/general-data');
 describe('Suite = Get Applications controller', function() {
 
     before(async function(){
-        associations();
         await Application.destroy({where:{}});
         await Spouse.destroy({where:{}});
         await Customer.destroy({where:{}});
