@@ -31,20 +31,12 @@ exports.passbookCheck = ( req, res ,next ) => {
                 message: 'This application is not approved, kindly review the application'
             });
         }
-        else if(currentApp[0].status === "ONGOING"){
-            throw({
-                subject: "application status", 
-                statusCode: 422,
-                location: "POST request for passbook", 
-                message: 'This application already has a passbook, kindly check its passbook'
-            });
-        }
         else if(currentApp[0].type_loan !== "SP" && applications.some(e => e.status === "ONGOING" && e.id !== appId)){
             throw({
                 subject: "application status", 
                 statusCode: 422,
                 location: "POST request for passbook", 
-                message: 'Has still an ONGOING application, kindly finish that application first'
+                message: 'This application still has an ongoing passbook, kindly finish that application first'
             });
         }
         next();

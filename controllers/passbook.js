@@ -7,9 +7,9 @@ exports.postPassbook = async (req, res ,next) => {
     let application = await Application.findByPk(req.body.AppId);
     return application.createPassbook(passbook)
     .then(passbook => {
-        return res.status(200).json(passbook);
+        return res.status(200).json({success: true, message: 'Successfuly Created Passbook', passbook: passbook});
     })
     .catch(err => {
-        console.log(err);
+        next(err);
     });
 };
