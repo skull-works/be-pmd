@@ -24,10 +24,8 @@ exports.createData = async (customers) => {
     }
 }
 
-exports.dateTodayPlus1 = () => {
-    let dateNow = (new Date()).toISOString().split('T')[0];
-    let t = new Date();
-    dateNow = (dateNow.substring(0, dateNow.length-2) + (t.getDate() +1));
+exports.dateToday = () => {
+    let dateNow = new Date().toISOString().slice(0, 10);
     return dateNow;
 }
 

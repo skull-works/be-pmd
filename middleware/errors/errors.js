@@ -14,7 +14,20 @@ exports.standardError = (subject, message, next) => {
         }catch(err){
             return next(err);
         }
+}
+
+
+
+exports.authErrors = (err, next) => {
+    try{
+        if(err)
+            throw(err);
     }
+    catch(error){
+        next(error);
+    }
+} 
+
 
 
 exports.errorValidation = (req,res,next) => {

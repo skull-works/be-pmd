@@ -1,17 +1,47 @@
-const { INTEGER, STRING, DATEONLY } = require('sequelize');
-const sequelize = require('../../util/database');
 
-const PassbookItem =sequelize.define('passbookItem' , {
-    id: {
-        type: INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-    },
-    dates_paid: DATEONLY,
-    balance: INTEGER,
-    collection: INTEGER,
-    remarks: STRING
-})
+module.exports = (sequelize, Sequelize) => {
+    const { INTEGER, FLOAT, STRING, DATEONLY } = Sequelize;
+    const PassbookItem =sequelize.define('passbookItem' , {
+        id: {
+            type: INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false,
+        },
+        dates_paid: {
+            type: DATEONLY,
+            allowNull: false,
+            defaultValue: Sequelize.NOW
+        },
+        amount_finance: {
+            type: FLOAT,
+            allowNull: true,
+            defaultValue: null
+        },
+        balance: {
+            type: FLOAT,
+            allowNull: false
+        },
+        collection: {
+            type: FLOAT,
+            allowNull: false
+        },
+        interest_penalty: {
+            type: FLOAT,
+            allowNull: true,
+            defaultValue: null
+        },
+        collector_initial: {
+            type: STRING,
+            allowNull: true,
+            defaultValue: null
+        },
+        remarks: {
+            type: STRING,
+            allowNull: true,
+            defaultValue: null
+        }
+    });
 
-module.exports = PassbookItem;
+    return PassbookItem;
+}

@@ -9,7 +9,10 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
         },
         area_code: STRING,
-        createdAt: DATEONLY
+        createdAt: {
+            type: DATEONLY,
+            defaultValue: Sequelize.NOW
+        }
     });
 
     return Passbook;

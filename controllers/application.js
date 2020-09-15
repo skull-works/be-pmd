@@ -3,7 +3,7 @@ const { Op } = require('sequelize');
 //models
 const { Application, Customer, Spouse, Paybases } = require('../models/index');
 //errors
-const Errors = require('../errors/errors');
+const Errors = require('../middleware/errors/errors');
 //operations
 const { CalculateLoan, updateTypeBothUpdateApplication } = require('./operations/application');
 
@@ -75,7 +75,8 @@ exports.getApplications = (req,res,next) => {
           }
   }})
   .then(data => {
-      data = data.length !== 0 ? data : { error: 'no data found'};
+      if(data.length === 0 ) throw({message: 'no data found', statusCode: 404});
+    //   data = data.length !== 0 ? data : { error: 'no data found'};
       return res.status(200).json(data);
   })    
   .catch(err => {
@@ -86,7 +87,7 @@ exports.getApplications = (req,res,next) => {
 
 
 
-exports.getApplicationDetails = (req,res,next) => {
+exports.getApplicationDetails = (req, res, next) => {
     let data = {};
     Customer.findOne({
         attributes: {

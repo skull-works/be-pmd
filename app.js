@@ -4,11 +4,19 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const csrf = require('csurf');
+const cookieParser = require('cookie-parser');
 //routes
 const applicationRoutes = require('./routes/application');
 const passbookRoutes = require('./routes/passbook');
+const authRoutes = require('./routes/authenticate');
 
 const app = express();
+const csrfProtection = csrf({
+    cookie:{
+        httpOnly:true
+    }
+});
 
 require('dotenv').config();
 let port = process.env.PORT || 9000;
@@ -35,11 +43,16 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 //middleware setup
 app.use(express.json());
-app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser("secret"));
+app.use(csrfProtection);
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 
 //middleware routes
+app.use(authRoutes);
 app.use(applicationRoutes);
 app.use(passbookRoutes);
 

@@ -2,10 +2,11 @@
 const express = require('express');
 //controllers
 const applicationController = require('../controllers/application');
-//validations
-const applicationValidator = require('../validation/application');
+//middlewares
+const applicationValidator = require('../middleware/validation/application');
+const { isAuthenticated } = require('../middleware/authentication/isAuth');
 //errors
-const Errors = require('../errors/errors');
+const Errors = require('../middleware/errors/errors');
 //initialize express router
 const router = express.Router();
 
@@ -27,6 +28,7 @@ const router = express.Router();
  */
 router.post(
     '/application_form',
+    isAuthenticated,
     applicationValidator.appNamesCodeInput,
     applicationValidator.appPostInputValidation,
     applicationValidator.appApplicationInput,
@@ -38,16 +40,16 @@ router.post(
 
 /**
  * @swagger
- * /application_form/:{start_date}/:{end_date}:
+ * /application_form/{start_date}/{end_date}:
  *                get:
  *                  parameters:
  *                      - name: start_date
  *                        description: start_date field
- *                        in: parameters
+ *                        in: path
  *                        required: true
  *                      - name: end_date
  *                        description: end_date field
- *                        in: parameters
+ *                        in: path
  *                        required: true
  *                      - name: inputs
  *                        description: input parameter to use to get application data
@@ -60,6 +62,7 @@ router.post(
  */
 router.get(
     '/application_form/:start_date/:end_date',
+    isAuthenticated,
     applicationValidator.jsonParse,
     applicationValidator.appGetApplicationInput,
     Errors.errorValidation,
@@ -72,12 +75,14 @@ router.get(
  *                   parameters:
  *                     - name: area_code
  *                       description: area id of customer of application
- *                       in: parameters
+ *                       in: path
  *                       required: true
  *                     - name: formId
  *                       description: id of application
- *                       in: parameters
+ *                       in: path
  *                       required: true
+ *                       schema:
+ *                         type: integer
  *                   description: request to get application details 
  *                   responses:
  *                      '202': 
@@ -85,6 +90,7 @@ router.get(
  */
 router.get(
     '/application_form-details/:area_code/:formId',
+    isAuthenticated,
     applicationValidator.getApplicationInputDetails,
     Errors.errorValidation,
     applicationController.getApplicationDetails);
@@ -114,6 +120,7 @@ router.get(
   */   
 router.put(
     '/application_form',
+    isAuthenticated,
     applicationValidator.getApplicationInputUpdate,
     Errors.errorValidation,
     applicationController.updateApplication

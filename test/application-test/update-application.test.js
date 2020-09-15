@@ -1,25 +1,35 @@
 //testing frameworks
 const { expect } = require('chai');
-const request = require('supertest');
 //helper
 const { createData, findCustomer } = require('./helper/helper');
-//application
-const app = require('../../app');
+//sessoins and authentication
+const { createLoginUser, createSession, Login } = require('../general-helper/session');
 //models
-const { Application, Customer, Spouse } = require('../../models/index');
+const { Application, Customer, Spouse, User } = require('../../models/index');
 //mockData
 const data = require('./data/general-data');
 const updateData = require('./data/update-application');
 
 
 describe('Suite = Update Application Controller', function(){
+    let user = 'TestAdmin6', userPassword = 'TestPassword6';
+    let csrf, session;
             
     before(async function(){
+        //removing data then create data for customer, applications and spouse
+        await User.destroy({where:{}});
         await Customer.destroy({where:{}});
         await Application.destroy({where:{}});
         await Spouse.destroy({where:{}});
         let customers = await Customer.bulkCreate([...data.customers]);
         createData(customers);
+
+        //create Login user and sessions
+        await createLoginUser(user, userPassword);
+        let { newSession, csurf } = await createSession();
+        session = newSession;
+        csrf = csurf;
+        await Login(session, user, userPassword, csrf);
     });
 
 
@@ -28,9 +38,8 @@ describe('Suite = Update Application Controller', function(){
             it('Update area_code should update both customer and application table', async function(){
                 let customer = await findCustomer('TEST-01');
                 let sendData = updateData.updateApplicationDetails('both', 'area_code', 'TEST-200', customer.id);
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
                 expect(body.message).to.eql('Updated Customer and 3 Applications Successfuly');
@@ -39,9 +48,8 @@ describe('Suite = Update Application Controller', function(){
             it('Update first_name should update both customer and application table', async function(){
                 let customer = await findCustomer('TEST-200');
                 let sendData = updateData.updateApplicationDetails('both', 'first_name', 'TestNewFirstName', customer.id);
-                let { body, statusCode } = await request(app)
-                                                                 .put('/application_form')
-                                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
                 expect(body.message).to.eql('Updated Customer and 3 Applications Successfuly');
@@ -50,9 +58,8 @@ describe('Suite = Update Application Controller', function(){
             it('Update last_name should update both customer and application table', async function(){
                 let customer = await findCustomer('TEST-200');
                 let sendData = updateData.updateApplicationDetails('both', 'last_name', 'TestNewLastName', customer.id);
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
                 expect(body.message).to.eql('Updated Customer and 3 Applications Successfuly');
@@ -66,9 +73,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'birth_date', '2018-04-04');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('birth_date updated successfuly');
             });
@@ -79,9 +85,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'age', '20');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('age updated successfuly');
             });
@@ -92,9 +97,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'contact_no', '09990371222');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('contact_no updated successfuly');
             });
@@ -105,9 +109,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'civil_status', 'M');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('civil_status updated successfuly');
             });
@@ -118,9 +121,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'street_address', 'Manila');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('street_address updated successfuly');
             });
@@ -131,9 +133,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'barangay', 'Poblacion 11');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('barangay updated successfuly');
             });
@@ -144,9 +145,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'city', 'Metro Manila');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('city updated successfuly');
             });
@@ -157,9 +157,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'province', 'Province of Manila');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('province updated successfuly');
             });
@@ -170,9 +169,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'religion', 'Roman Catholic');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('religion updated successfuly');
             });
@@ -183,9 +181,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'nationality', 'Russian');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('nationality updated successfuly');
             });
@@ -196,9 +193,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'source_of_income', 'Lending');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('source_of_income updated successfuly');
             });
@@ -209,9 +205,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'length_of_service', '6 years');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('length_of_service updated successfuly');
             });
@@ -222,9 +217,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'length_of_stay', '6 years');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('length_of_stay updated successfuly');
             });
@@ -235,9 +229,8 @@ describe('Suite = Update Application Controller', function(){
                 let data = updateData.updateApplicationDetails('customer', 'occupation', 'BusinessPerson');
                 data.id = customer.id;
                 sendData = data;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('occupation updated successfuly');
             });
@@ -246,9 +239,8 @@ describe('Suite = Update Application Controller', function(){
         context('Application', function(){
             it('update amount loan and will also change interest_amount and total base on amount loan', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'amount_loan', 4000, 4);     // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 let application = await Application.findByPk(4);     // pay_type is daily
 
                 expect(statusCode).to.eql(200);
@@ -262,9 +254,8 @@ describe('Suite = Update Application Controller', function(){
 
             it('update pay_type to daily should change (interest_amount and total) base on interest rate 0.14', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'pay_type', 'DAILY', 5);      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 let application = await Application.findByPk(5);     // pay_type is WEEKLY change to DAILY and amount loan is already 3000
 
                 expect(statusCode).to.eql(200);
@@ -280,9 +271,8 @@ describe('Suite = Update Application Controller', function(){
             it('update pay_type to MONTHLY should change (interest_amount and total) base on interest rate 0.1 & mnths_to_pay', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'pay_type', 'MONTHLY', 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
                 let application = await Application.findByPk(6);                  //pay_type is DAILY change to MONTHLY and amount loan is already 3000
 
                 expect(statusCode).to.eql(200);
@@ -297,9 +287,8 @@ describe('Suite = Update Application Controller', function(){
             it('update days_to_pay', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'days_to_pay', 58, 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -309,9 +298,8 @@ describe('Suite = Update Application Controller', function(){
             it('update pay_breakdown', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'pay_breakdown', 70, 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -321,9 +309,8 @@ describe('Suite = Update Application Controller', function(){
             it('update proc_fee', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'proc_fee', 120, 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -333,9 +320,8 @@ describe('Suite = Update Application Controller', function(){
             it('update remarks', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'remarks', 'new sample remarks message', 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                        .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -345,9 +331,8 @@ describe('Suite = Update Application Controller', function(){
             it('update status to approved', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'status', 'APPROVED', 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
-                                                 .put('/application_form')
-                                                 .send(sendData);
+                let { body, statusCode } = await session.put('/application_form')
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -357,9 +342,9 @@ describe('Suite = Update Application Controller', function(){
             it('update status to rejected', async function(){
                 let sendData = updateData.updateApplicationDetails('application', 'status', 'REJECTED', 6);      // 4th argument is form ID of appliation from general-data
                 sendData.mnths_to_pay = 2;
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -371,9 +356,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Sfirst_name', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'TestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Sfirst_name', 'NewTestSpouseFname2', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -384,9 +369,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Slast_name', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Slast_name', 'NewTestSpouseLname2', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -396,9 +381,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Sbirth_date', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Sbirth_date', '2018-04-04', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -408,9 +393,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Scontact_no', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Scontact_no', '09990371921', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -420,9 +405,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Sstreet_address', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Sstreet_address', 'Cavite street', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -432,9 +417,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Sbarangay', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Sbarangay', 'Cavite barangay', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -444,9 +429,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Scity', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Scity', 'Cavite city', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -456,9 +441,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Sprovince', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Sprovince', 'Cavite province', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -468,9 +453,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Sreligion', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Sreligion', 'Roman Catholic', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -480,9 +465,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Ssource_of_income', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Ssource_of_income', 'Sales market manager', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
@@ -492,9 +477,9 @@ describe('Suite = Update Application Controller', function(){
             it('update Snationality', async function(){
                 let spouse = await Spouse.findOne({ where: { Sfirst_name: 'NewTestSpouseFname2' }});
                 let sendData = updateData.updateApplicationDetails('spouse', 'Snationality', 'Filipina', spouse.id );      // 4th argument is form ID of appliation from general-data
-                let { body, statusCode } = await request(app)
+                let { body, statusCode } = await session
                                                  .put('/application_form')
-                                                 .send(sendData);
+                                                 .send({...sendData, _csrf: csrf});
 
                 expect(statusCode).to.eql(200);
                 expect(body.type).to.eql('success');
