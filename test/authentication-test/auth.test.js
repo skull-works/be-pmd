@@ -134,7 +134,7 @@ describe('Suite === Authentication Controller', function(){
                 }else
                     console.log('error in test');
                 expect(res.statusCode).to.eq(403);
-                expect(res.body.error.message).to.eql('token key not existing in redis anymore');
+                expect(res.body.error.message).to.eql('Session timed out, kindly login again');
             });
 
             it('JWT does not match redis token value', async function(){
@@ -145,7 +145,7 @@ describe('Suite === Authentication Controller', function(){
                 let res = await session.get('/isLoggedIn')     //make request
                                        .send({ _csrf: csrf });
                 expect(res.statusCode).to.eq(403);
-                expect(res.body.error.message).to.eql('Token value not existing in redis anymore');
+                expect(res.body.error.message).to.eql('Login seems to be used already, kindly login ASAP and contact system administrator');
             });
 
             it('Passed all checking should generate new accessToken', async function(){
@@ -189,7 +189,7 @@ describe('Suite === Authentication Controller', function(){
                                             .get(`/application_form/2020-08-13/${dateNow}`)
                                             .send({_csrf:csrf});
             expect(statusCode).to.eql(403);
-            expect(body.message).to.eql('not authenticated');
+            expect(body.error.message).to.eql('not authenticated');
         });
 
         it('JWT csrf token does not match browser csrf token, should return invalid message', async function() {
@@ -214,7 +214,7 @@ describe('Suite === Authentication Controller', function(){
                             .send({_csrf: csrf});
             }
             expect(res.statusCode).to.eq(403);
-            expect(res.body.error.message).to.eql('token key not existing in redis anymore');
+            expect(res.body.error.message).to.eql('Session timed out, kindly login again');
         });
 
         it('JWT does not match redis token value', async function() {
@@ -228,7 +228,7 @@ describe('Suite === Authentication Controller', function(){
                         .send({_csrf: csrf});
 
             expect(res.statusCode).to.eq(403);
-            expect(res.body.error.message).to.eql('Token value not existing in redis anymore');
+            expect(res.body.error.message).to.eql('Login seems to be used already, kindly login ASAP and contact system administrator');
         });
     });
 

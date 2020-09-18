@@ -50,7 +50,7 @@ module.exports = (sequelize, Sequelize) => {
             total: body.total,   
             date_issued: Date.now(),
             status: 'PROCESSING',
-            created_by: 'user',
+            created_by: body.user,
             proc_fee: body.proc_fee,
             remarks: body.remarks
         })

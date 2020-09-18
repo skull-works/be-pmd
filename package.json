@@ -6,13 +6,15 @@
   "scripts": {
     "start": "node index.js",
     "test": "env-cmd ./config/test.env mocha --recursive --watch --unhandled-rejections=strict --reporter min",
-    "coverage": "env-cmd ./config/test.env nyc --reporter=html --reporter=text mocha --recursive --reporter min",
     "dev": "env-cmd ./config/dev.env nodemon",
+    "up-dev": " docker run --name my-pmdapi --env HOST=host.docker.internal --env REDISPORT=6379 --env DBNAME=pmd-dev --env USER=marcoadmin0 --env PASS=marcopass0 --env JWTSECRET=devSecret --rm -p 9000:9000 mabutalid1/pmdapi:latest",
+    "up-prod": "docker run --name my-pmdapi --env HOST=pmd-test.cgn2g7z9tsvr.ap-southeast-1.rds.amazonaws.com --env REDISHOST=host.docker.internal --env REDISPORT=6379 --env DBNAME=PMD --env USER=admin --env PASS=Adminpassword --env JWTSECRET=devSecret --rm -p 9000:9000 mabutalid1/pmdapi:latest",
+    "up-redis": "docker run --rm --name my-redis -p 6379:6379/tcp -d redis:latest",
+    "coverage": "env-cmd ./config/test.env nyc --reporter=html --reporter=text mocha --recursive --reporter min",
     "sync": "node ./models/sync.js",
     "test-sync": "env-cmd ./config/test.env node ./models/sync.js",
     "dev-sync": "env-cmd ./config/dev.env  node ./models/sync.js",
-    "up": " docker run --env HOST=host.docker.internal --env DBNAME=pmd-dev --env USER=marcoadmin0 --env PASS=marcopass0 --rm -p 9000:9000 mabutalid1/pmdapi:latest",
-    "docker-build": "docker build . -t mabutalid1/pmdapi:latest"
+    "docker-build": "docker build . -t mabutalid1/pmdapi:latest && docker push mabutalid1/pmdapi:latest"
   },
   "author": "Marco Butalid",
   "license": "ISC",

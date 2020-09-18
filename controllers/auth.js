@@ -14,7 +14,6 @@ let jwtSecret = process.env.JWTSECRET;
 
 
 exports.generateCSRF = (req, res) => {
-    // console.log('generatign CSRF TOKEN ...');
     res.status(200).json({csrfToken: req.csrfToken()});
 };
 
@@ -42,7 +41,7 @@ exports.signUp = async (req, res, next) => {
 
 
 exports.Login = async (req, res, next) => {
-    let username = req.body.username || 'forceWrongLaterWIllAddInputValidation';
+    let username = req.body.username;
     let password = req.body.password;
     let jwtCSRF = req.headers['x-csrf-token'] || req.body._csrf;
     //step 1 authentication
@@ -50,15 +49,14 @@ exports.Login = async (req, res, next) => {
         let user = await User.findOne({ where:{ username: username }});
         if(!user) throw({message: 'no user with this username', statusCode: 403});
 
-
         let doMatch = await bcrypt.compare(password, user.password);
         if(!doMatch) throw ({message: 'wrong password', statusCode: 403});
 
         //step 3 create jwt token
         let token = { name: username, csrf: jwtCSRF};
         let accessToken = await generateAccessToken(token, res);
-
-        if(accessToken.error) return authErrors(accessToken.error);
+ 
+        if(accessToken.error) return authErrors(accessToken.error, next);
         else res.status(200).json({isLoggedIn: true, message: 'Login successful'});
     }catch(err){
         next(err);
@@ -80,7 +78,7 @@ exports.isLoggedIn = (req, res, next) => {
             // console.log('generating new csrf and jwt token ...');
             let accessToken = await generateAccessToken({name: username, csrf: req.csrfToken()}, res);
 
-            if(accessToken.error) return authErrors(accessToken.error);
+            if(accessToken.error) return authErrors(accessToken.error, next);
             return res.status(200).json({csrfToken: req.csrfToken(), isLoggedIn: true});
         });
     }

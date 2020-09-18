@@ -2,9 +2,15 @@ const redis = require('redis');
 const { promisify } = require('util');
 require('dotenv').config();
 
+let redisHost = process.env.REDISHOST || process.env.HOST || 'localhost';
 let redisPort = process.env.REDISPORT || 6379;
 
-const client = redis.createClient(redisPort);
+let redisOptions = {
+    host: redisHost,
+    port: redisPort
+}
+
+const client = redis.createClient(redisOptions);
 let get = promisify(client.get).bind(client);
 let del = promisify(client.del).bind(client);
 
@@ -34,16 +40,15 @@ const setCLient = async (key, value) => {
 const isClientValid = async (key, Cookietoken) => {
     try{
         let value = await get(key);
-        // console.log('token here ================> ' + value);
         if(!value) {
             throw({
-                message: 'token key not existing in redis anymore',
+                message: 'Session timed out, kindly login again',
                 statusCode: 403
             });
         }
-        if(value !== Cookietoken){
+        if(value !== Cookietoken){ // if token already used
             throw({
-                message: 'Token value not existing in redis anymore',
+                message: 'Login seems to be used already, kindly login ASAP and contact system administrator',
                 statusCode: 403
             });
         }
