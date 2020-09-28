@@ -1,5 +1,6 @@
 //testing frameworks
 const { expect } = require('chai');
+const moment = require('moment');
 //mockData
 const data = require('../data/general-data');
 //models
@@ -25,7 +26,8 @@ exports.createData = async (customers) => {
 }
 
 exports.dateToday = () => {
-    let dateNow = new Date().toISOString().slice(0, 10);
+    // let dateNow = new Date().toISOString().slice(0, 10);
+    let dateNow = moment().add(1, 'days').format('YYYY-MM-DD');
     return dateNow;
 }
 

@@ -60,6 +60,9 @@ exports.getApplications = (req,res,next) => {
             date_issued:{
                 [Op.between]: [start_date, end_date]
             },
+            area_code: {
+                [Op.like]: inputs.area_code
+            },
             type_loan: {
                 [Op.like]: inputs.type_loan
             },
@@ -73,10 +76,12 @@ exports.getApplications = (req,res,next) => {
                 [Op.like]: inputs.last_name
             }
           }
-  }})
+        },
+        raw:true
+  })
   .then(data => {
       if(data.length === 0 ) throw({message: 'no data found', statusCode: 404});
-    //   data = data.length !== 0 ? data : { error: 'no data found'};
+      // data = data.length !== 0 ? data : { error: 'no data found'};
       return res.status(200).json(data);
   })    
   .catch(err => {

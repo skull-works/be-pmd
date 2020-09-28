@@ -84,15 +84,33 @@ describe('Suite = Post Application controller', function(){
                expect(res.body.data).not.to.have.property('customer');
                expect(customer.no_of_applications).to.eql(3);
          });
+
+         it('Renew application with existing SP ongoing application should create application', async function() {
+            let application = await Application.findByPk(dianeFormId);
+            application.status = 'CLOSED';
+            await application.save();
+            let res = await session.post('/application_form')
+                                   .send({...data.postApplicationRenew, _csrf: csrf});
+            let customer = await Customer.findOne({where: {area_code: "AC-011",first_name: 'Diane'}});
+
+            expect(application.status).to.eql('CLOSED');
+            expect(res.statusCode).to.eql(201);
+            expect(res.body.data).to.have.property('application');
+            expect(res.body.data).not.to.have.property('spouse');
+            expect(res.body.data).not.to.have.property('customer');
+            expect(customer.no_of_applications).to.eql(4);
+         });
       });
       
 
      context('Validation Cases', function(){
             context('appPostInputValidation', function(){
                   it('Renew application with existing ongoing application should not create application', async function() {
+                        let application = await Application.findByPk(dianeFormId);
+                        application.status = 'PROCESSING';
+                        application.save();
                         let res = await session.post('/application_form')
                                                .send({...data.postApplicationRenew, _csrf: csrf});
-                        let application = await Application.findByPk(dianeFormId);
                         expect(application.status).to.eql('PROCESSING');
                         expect(res.statusCode).to.eql(409);
                         expect(res.body).to.eql(data.postErrorExistingApplication);
@@ -116,6 +134,13 @@ describe('Suite = Post Application controller', function(){
                         expect(res.body).to.eql(data.postErrorNewApplicationButTypeLoanNotNew);
                   });
 
+                  it('New application customer existing but using new area_code should not create application', async function() {
+                        let res = await session.post('/application_form')
+                                               .send({area_code: 'AX5-01', first_name: 'Diane', last_name: 'Butalid',  type_loan: 'NEW', _csrf: csrf});
+                        expect(res.statusCode).to.eq(422);
+                        expect(res.body.error.message).to.eql('Customer already exist and has a area code, please Check at review application for its area code')
+                  });
+
                   it('SP application but has no existing ongoing application === not create application', async function() {
                         let res = await session.post('/application_form')
                                                .send({...data.postApplicationSPbutCurrentlyNoOngoingApplication, _csrf:csrf});
@@ -137,7 +162,7 @@ describe('Suite = Post Application controller', function(){
                         expect(res.body.data).to.have.property('application');
                         expect(res.body.data).not.to.have.property('spouse');
                         expect(res.body.data).not.to.have.property('customer');
-                        expect(customer.no_of_applications).to.eql(4);
+                        expect(customer.no_of_applications).to.eql(5);
                   });
 
                   it('Regular application but using another customer area code === not create application', async function() {

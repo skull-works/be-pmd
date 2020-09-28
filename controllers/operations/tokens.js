@@ -6,7 +6,8 @@ require('dotenv').config();
 let secret = process.env.JWTSECRET;
 let cookeAge = process.env.COOKIEAGE || 300000
 let jwtExpire = process.env.JWTEXPIRE || '5m'
-let cookiesOption = { httpOnly: true, signed: true, expires:true, maxAge: cookeAge }
+let cookieSecure = process.env.COOKIESECURE || false;
+let cookiesOption = { httpOnly: true, secure: cookieSecure, signed: true, expires:true, maxAge: cookeAge };
 
 
 const envVarCheck = () => {

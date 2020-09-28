@@ -42,6 +42,16 @@ describe('Suite = Get Applications controller', function() {
             expect(body.length).to.eql(6);      //all records according to date only
         });
 
+        it('Fetch applications according to date and area_code', async function() {
+            let query = JSON.stringify({area_code: 'TEST-03'});
+            let { body, statusCode } = await session
+                                             .get(`/application_form/2020-08-13/${dateNow}?inputs=${query}`)
+                                             .send({_csrf:csrf});
+            expect(statusCode).to.eql(200);
+            expect(body.length).to.eql(2);
+            expect(body[0].first_name).to.eql('TestFname3');
+        });
+
         it('Fetch applications according to date and first_name', async function() {
             let query = JSON.stringify({first_name: 'TestFname1'});
             let { body, statusCode } = await session
@@ -108,6 +118,15 @@ describe('Suite = Get Applications controller', function() {
     });
 
     context('Validation Cases', function(){
+        it('invalid area_code should return error', async function(){
+            let query = JSON.stringify({area_code: 1});
+            let { body, statusCode } = await session
+                                             .get(`/application_form/2020-08-13/${dateNow}?inputs=${query}`)
+                                             .send({_csrf:csrf});
+            expect(statusCode).to.eql(422);
+            expect(body.error.message).to.eql('Format should be XX1-');
+        });
+
         it('invalid first_name should return error', async function(){
             let query = JSON.stringify({first_name: 1});
             let { body, statusCode } = await session

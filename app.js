@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const applicationRoutes = require('./routes/application');
 const passbookRoutes = require('./routes/passbook');
 const authRoutes = require('./routes/authenticate');
-
+const reportRoutes = require('./routes/reports');
 const app = express();
 const csrfProtection = csrf({
     cookie:{
@@ -55,6 +55,7 @@ app.use(cors({
 app.use(authRoutes);
 app.use(applicationRoutes);
 app.use(passbookRoutes);
+app.use(reportRoutes);
 
 
 

@@ -30,6 +30,7 @@ router.post(
     '/application_form',
     isAuthenticated,
     applicationValidator.appNamesCodeInput,
+    applicationValidator.CapitalizeNamesCodeInput,
     applicationValidator.appPostInputValidation,
     applicationValidator.appApplicationInput,
     applicationValidator.appCustomerInput,

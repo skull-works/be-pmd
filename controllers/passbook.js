@@ -5,12 +5,17 @@ exports.postPassbook = async (req, res ,next) => {
     let passbook = {...req.body};
     let application = await Application.findByPk(req.body.AppId);
     return application.createPassbook(passbook)
-    .then(passbook => {
-        return res.status(200).json({
-            success: true, 
-            message: 'Successfuly Created Passbook', 
-            passbook: passbook
-        });
+    .then(async passbook => {
+        if(passbook){
+            application.status = 'ONGOING';
+            await application.save();
+            return res.status(200).json({
+                success: true, 
+                message: 'Successfuly Created Passbook', 
+                passbook: passbook
+            });
+        }
+        return res.json({message: 'failed to create passbook'});
     })
     .catch(err => {
         next(err);
@@ -20,8 +25,13 @@ exports.postPassbook = async (req, res ,next) => {
 
 exports.postPassbookItems = async (req, res, next) => {
     let passbook = await Passbook.findByPk(req.body.passbookId);
-    return passbook.createPassbookItem(req.body)
-    .then(item => {
+    return passbook.createPassbookitem(req.body)
+    .then(async item => {
+        if(item && req.body.balance === 0 ){
+            let application = await Application.findByPk(req.body.applicationId);
+            application.status = 'CLOSED';
+            await application.save();
+        }
         res.status(200).json({
             success: true,
             message: 'Payment created successfuly',

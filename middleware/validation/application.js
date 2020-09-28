@@ -1,5 +1,5 @@
 const { body, param, query } = require('express-validator');
-const { Application } = require('../../models/index');
+const { Application, Customer } = require('../../models/index');
 const { Op } = require('sequelize');
 const helper = require('./helper/helper');
 
@@ -16,7 +16,7 @@ const message7 = "must be character letters";
 //post application -----
 
 
-exports.appPostInputValidation = (req,res,next) => {
+exports.appPostInputValidation = (req, res, next) => {
         return Application.findAll({
                 attributes: ['id','first_name','last_name','status','type_loan'],
                 where: {
@@ -26,7 +26,7 @@ exports.appPostInputValidation = (req,res,next) => {
                                 { type_loan: {[Op.eq]:  "NEW"}}
                         ]
                 }})
-        .then(applications => {
+        .then(async applications => {
                 let length = applications.length;
 
                 if(length === 0){
@@ -38,10 +38,22 @@ exports.appPostInputValidation = (req,res,next) => {
                                         statusCode: 422
                                 })
                         }
+                        let thisCustomer = await Customer.findOne({ 
+                                attributes: ['area_code'],
+                                where:{ first_name: req.body.first_name, last_name: req.body.last_name } });
+                        if(thisCustomer && thisCustomer.area_code !== req.body.area_code){
+                                throw({
+                                        subject: "type_loan",
+                                        location: "Post request for applications",
+                                        message: "Customer already exist and has a area code, please Check at review application for its area code",
+                                        statusCode: 422
+                                })
+                        }
+
                 }
                 else if(length > 0){
                         //check if area code is already taken
-                        if(applications[0].first_name !== req.body.first_name){
+                        if(applications[0].first_name !== req.body.first_name || applications[0].last_name !== req.body.last_name){
                                 throw({
                                         subject: "area_code & name",
                                         location: "Post request for applictions",
@@ -50,7 +62,9 @@ exports.appPostInputValidation = (req,res,next) => {
                                 });
                         }
 
-                        if(applications.some(e => e.status === "PROCESSING" || e.status === "APPROVED" || e.status === "ONGOING")){
+                        if(applications.some(e => (e.status === "PROCESSING" && e.type_loan !== "SP") || 
+                                                  (e.status === "APPROVED" && e.type_loan !== "SP") || 
+                                                  (e.status === "ONGOING" && e.type_loan !== "SP"))){
                                 if(req.body.type_loan !== "SP"){
                                         throw ({
                                                 subject: "existing", 
@@ -94,13 +108,21 @@ exports.appNamesCodeInput = [
             .trim(' '),
         body('first_name', message7)
             .isString()
-            .trim()
+            .trim(' ')
             .optional(),
         body('last_name', message7)
             .isString()
-            .trim()
+            .trim(' ')
             .optional(),
 ]
+
+exports.CapitalizeNamesCodeInput = (req, res, next) => {
+        let value = req.body.area_code;
+        let first = value.substring(0, 2).toUpperCase();
+        let last = value.substring(2, value.length);
+        req.body.area_code = first + last;
+        next();
+}
 
 
 exports.appCustomerInput = [
@@ -116,82 +138,90 @@ exports.appCustomerInput = [
     body('street_address', message2 + ' ' + message4)
             .isString()
             .isLength({min:2, max:40})
-            .trim()
+            .trim(' ')
             .optional(),
     body('barangay', message2 + ' ' + message4)
             .isString()
             .isLength({min:2, max:40})
-            .trim()
+            .trim(' ')
             .optional(),
     body('city', message2 + ' ' + message4)
             .isString()
             .isLength({min:2, max:40})
-            .trim()
+            .trim(' ')
             .optional(),
     body('province', message2 + ' ' + message4)
             .isString()
             .isLength({min:2, max:40})
-            .trim()
+            .trim(' ')
             .optional(),
     body('religion', message2 + ' ' + message4)
             .isString()
             .isLength({min:2, max:40})
-            .trim()
+            .trim(' ')
             .optional(),
     body('nationality', message2 + ' ' + message6)
             .isString()
             .isLength({min:2, max:50})
-            .trim()
+            .trim(' ')
             .optional(),
     body('source_of_income', message2 + ' ' + message6)
             .isString()
             .isLength({min:2, max:50})
-            .trim()
+            .trim(' ')
             .optional(),
     body('length_of_service', message2 + ' ' + message5)
             .isString()
             .isLength({min:2, max:30})
-            .trim()
+            .trim(' ')
             .optional(),
     body('length_of_stay', message2 + ' ' + message5)
             .isString()
             .isLength({min:2, max:30})
-            .trim()
+            .trim(' ')
             .optional(),
     body('occupation', message2 + ' ' + message4)
             .isString()
             .isLength({min:2, max:40})
-            .trim()
+            .trim(' ')
             .optional(),
     body('civil_status')
             .isString()
             .custom((value, {req}) => helper.postApplicationCivilStatus(value, req))
-            .trim()
+            .trim(' ')
             .optional()
 ]
 
 
 exports.appSpouseInput = [ 
         body('Sfirst_name')
-                .custom(((value,{req}) =>  helper.spouseInput(value, req, message7, 20))),
+                .custom(((value,{req}) =>  helper.spouseInput(value, req, message7, 20)))
+                .trim(' '),
         body('Slast_name')
-                .custom(((value,{req}) =>  helper.spouseInput(value, req, message7, 20))),
+                .custom(((value,{req}) =>  helper.spouseInput(value, req, message7, 20)))
+                .trim(' '),
         body('Sbirth_date')
                 .custom(((value,{req}) =>  helper.spouseDate(value,req))),
         body('Scontact_no')
                 .custom(((value,{req}) =>  helper.spouseNumOnlyInString(value, req))),
         body('Sstreet_address')
-                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30))),
+                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30)))
+                .trim(' '),
         body('Sbarangay')
-                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30))),
+                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30)))
+                .trim(' '),
         body('Scity')
-                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30))),
+                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30)))
+                .trim(' '),
         body('Sprovince')
-                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30))),
+                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30)))
+                .trim(' '),
         body('Sreligion')
-                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30))),
+                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30)))
+                .trim(' '),
         body('Ssource_of_income')
-                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30))),
+                .custom(((value,{req}) =>  helper.spouseInput(value ,req, message7, 30)))
+                .trim(' '),
 ]
 
 
@@ -212,11 +242,12 @@ exports.appApplicationInput = [
         body('remarks')
                 .isString().withMessage(message7)
                 .isLength({max:100}).withMessage('max characters should be 100')
+                .trim(' ')
                 .optional()
 ]
 
 
-//get application -----
+//get applications -----
 
 
 exports.jsonParse = (req, res, next) => {
@@ -227,6 +258,11 @@ exports.jsonParse = (req, res, next) => {
 
 
 exports.appGetApplicationInput = [
+        query('inputs.area_code', 'Format should be XX1-')
+                .isString()
+                .isLength({min:4})
+                .trim()
+                .optional(),
         query('inputs.first_name', message7)
                 .isString()
                 .trim()
@@ -249,6 +285,7 @@ exports.appGetApplicationInput = [
                 .isDate().withMessage('should be date')
                 .custom((value, {req}) => {
                         req.query.inputs = req.query.inputs || {};
+                        req.query.inputs.area_code  =  req.query.inputs.area_code ? req.query.inputs.area_code  + '%' : '%';
                         req.query.inputs.type_loan  =  req.query.inputs.type_loan ? req.query.inputs.type_loan  + '%' : '%';
                         req.query.inputs.status     =  req.query.inputs.status    ? req.query.inputs.status     + '%' : '%';
                         req.query.inputs.first_name =  req.query.inputs.first_name? req.query.inputs.first_name + '%' : '%';
@@ -265,7 +302,7 @@ exports.getApplicationInputDetails = [
         param('area_code')
                 .isString()
                 .isLength({min:4}).withMessage('must be atleast 4 characters')
-                .trim(),
+                .trim(' '),
         param('formId')
                 .isNumeric().withMessage('Must be a number')
 ]

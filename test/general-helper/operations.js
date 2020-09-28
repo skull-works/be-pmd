@@ -1,5 +1,7 @@
+const moment = require('moment');
+
 const dateToday = () => {
-    let dateNow = new Date().toISOString().slice(0, 10);
+    let dateNow = moment().add(1, 'days').format('YYYY-MM-DD');
     return dateNow;
 }
 
