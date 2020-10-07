@@ -13,7 +13,7 @@ const { User } = require('../../models/index');
 const client = redis.createClient(redisPort);
 let del = promisify(client.del).bind(client);
 let set = promisify(client.set).bind(client);
-
+ 
 describe('Suite === Authentication Controller', function(){
     let csrf, session;
 
