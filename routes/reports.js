@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const reportsController = require('../controllers/reports');
+const { isAuthenticated } = require('../middleware/authentication/isAuth');
 
 
 
@@ -28,6 +29,7 @@ const reportsController = require('../controllers/reports');
  */
 router.get(
     '/calendarReport/:areaGroup/:startDate/:endDate', 
+    isAuthenticated,
     reportsController.getCalendarReport
 );
 
