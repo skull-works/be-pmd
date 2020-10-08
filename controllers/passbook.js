@@ -90,12 +90,11 @@ exports.delPassbookItem = async (req, res, next) => {
                 itemFormId: req.params.formId,
                 itemCreatedAt: req.params.dates_paid,
             });
-            res.sendStatus(204);
+            return res.sendStatus(204);
         }
-        else
-            res.status(422).json({
-                message: 'Unable to delete due to Id not existing'
-            })
+        return res.status(422).json({
+            message: 'Unable to delete due to Id not existing'
+        });
     }catch(err){
         next(err);
     }

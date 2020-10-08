@@ -99,3 +99,17 @@ exports.getParamsPassbookItems = [
     param('formId')
         .isNumeric().withMessage('Should be a number')
 ]
+
+
+// delete passbook-item / payment
+
+exports.deleteParamsPassbookItems = [
+    param('id')
+        .isNumeric().withMessage('Should be a number'),
+    param('formId')
+        .isNumeric().withMessage('Should be a number'),
+    param('collection')
+        .isNumeric().withMessage('Should be a number'),
+    param('dates_paid')
+        .isDate().withMessage('should be date')
+]

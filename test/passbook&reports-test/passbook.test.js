@@ -1,9 +1,9 @@
 const { expect } = require('chai');
 const { createLoginUser, createSession, Login } = require('../general-helper/session');
+const moment = require('moment');
 
 const { Application, Customer, Spouse, Passbook, PassbookItems } = require('../../models/index');
 const { createData } = require('./helper/helper');
-const { dateToday } = require('../general-helper/operations');
 const data = require('./data/general-data');
 const passbookData = require('./data/post-passbook');
 
@@ -28,9 +28,10 @@ describe('Suite === Passbook', function(){
     });
 
     context('Passbook', function(){
-        context('Post operations', function(){
 
-            let passbookId, applicationId;  //this passbook id will be used for the creation of passbookItems
+        let passbookId, applicationId;  //this passbook id will be used for the creation of passbookItems and deletion
+
+        context('Post operations', function(){
             
             context('Passbook model/ Create Passbook', function(){
                 it('create passbook no previous application should create', async function(){
@@ -211,6 +212,64 @@ describe('Suite === Passbook', function(){
                     expect(statusCode).to.eq(422);
                     expect(body.error.field).to.eql('formId');
                     expect(body.error.message).to.eql('Should be a number');
+                });
+            });
+        });
+        
+        context('Delete operations', function(){
+            let result, paymentId, formId, collection, dates_paid;
+            before(async function(){
+                result = await session
+                               .post('/passbook-item')
+                               .send({...passbookData.postPassbookItems(passbookId, 2800, 200), _csrf: csrf});  //passbookId from above
+                paymentId = result.body.passbookItem.id;
+                formId = applicationId; // from above
+                collection = result.body.passbookItem.collection;
+                dates_paid = moment(result.body.passbookItem.dates_paid).format('YYYY-MM-DD');
+            });
+
+            it('Delete passbook item/payment successfuly', async function(){
+                dates_paid = moment(dates_paid).format('YYYY-MM-DD');
+                let { statusCode } = await session.delete(`/passbook-item/${paymentId}/${formId}/${collection}/${dates_paid}`)
+                                                  .send({_csrf: csrf});
+                expect(statusCode).to.eql(204);
+            });
+
+            it('passbookItem id not existing should return error message', async function(){
+                dates_paid = moment(dates_paid).format('YYYY-MM-DD');
+                let { body, statusCode } = await session.delete(`/passbook-item/100/${formId}/${collection}/${dates_paid}`)
+                                                  .send({_csrf: csrf});
+                expect(statusCode).to.eql(422);
+                expect(body.message).to.eql('Unable to delete due to Id not existing');
+            });
+
+            context('Validation cases should return an error', function(){
+                it('id', async function(){
+                    let { body, statusCode } = await session.delete(`/passbook-item/ers/${formId}/${collection}/${dates_paid}`)
+                                                  .send({_csrf: csrf});
+                    expect(statusCode).to.eql(422);
+                    expect(body.error.field).to.eql('id');
+                });
+
+                it('formId', async function(){
+                    let { body, statusCode } = await session.delete(`/passbook-item/100/ers/${collection}/${dates_paid}`)
+                                                  .send({_csrf: csrf});
+                    expect(statusCode).to.eql(422);
+                    expect(body.error.field).to.eql('formId');
+                });
+
+                it('collection', async function(){
+                    let { body, statusCode } = await session.delete(`/passbook-item/100/100/ers/${dates_paid}`)
+                                                  .send({_csrf: csrf});
+                    expect(statusCode).to.eql(422);
+                    expect(body.error.field).to.eql('collection');
+                });
+
+                it('dates_paid', async function(){
+                    let { body, statusCode } = await session.delete(`/passbook-item/100/100/100/ers`)
+                                                  .send({_csrf: csrf});
+                    expect(statusCode).to.eql(422);
+                    expect(body.error.field).to.eql('dates_paid');
                 });
             });
         });

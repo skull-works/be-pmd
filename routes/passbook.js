@@ -117,6 +117,8 @@ router.get(
 router.delete(
     '/passbook-item/:id/:formId/:collection/:dates_paid',
      isAuthenticated,
+     passbookValidation.deleteParamsPassbookItems,
+     errorValidation,
      passbookController.delPassbookItem
 );
 
