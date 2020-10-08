@@ -239,7 +239,7 @@ describe('Suite === Passbook', function(){
                 dates_paid = moment(dates_paid).format('YYYY-MM-DD');
                 let { body, statusCode } = await session.delete(`/passbook-item/100/${formId}/${collection}/${dates_paid}`)
                                                   .send({_csrf: csrf});
-                expect(statusCode).to.eql(422);
+                expect(statusCode).to.eql(200);
                 expect(body.message).to.eql('Unable to delete due to Id not existing');
             });
 

@@ -92,7 +92,7 @@ exports.delPassbookItem = async (req, res, next) => {
             });
             return res.sendStatus(204);
         }
-        return res.status(422).json({
+        return res.status(200).json({
             message: 'Unable to delete due to Id not existing'
         });
     }catch(err){
