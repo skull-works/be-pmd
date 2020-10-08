@@ -29,6 +29,7 @@ db.Customer = require('./models/customer')(sequelize, Sequelize);
 db.Spouse = require('./models/spouse')(sequelize, Sequelize);
 db.Paybases = require('./models/payment_classifications')(sequelize, Sequelize);
 db.User = require('./models/user')(sequelize, Sequelize);
+db.Log = require('./models/log')(sequelize, Sequelize);
 
 //associations
 db.Spouse.belongsTo(db.Customer);
@@ -39,6 +40,7 @@ db.Application.belongsTo(db.Customer);
 
 db.Application.hasOne(db.Passbook);
 db.Passbook.hasMany(db.PassbookItems);
+
 
 
 module.exports = db;

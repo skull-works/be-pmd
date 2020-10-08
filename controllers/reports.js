@@ -1,6 +1,7 @@
 const { Op } = require('sequelize');
+const moment = require('moment');
 //models
-const { Application, Customer, Passbook, PassbookItems } = require('../models/index');
+const { Application, Customer, Passbook, PassbookItems, Log } = require('../models/index');
 //helper function
 const { getDates } = require('./operations/reports');
 
@@ -44,5 +45,18 @@ exports.getCalendarReport = async (req, res, next) => {
         throw({ message: 'no data found' })
     }catch(err){
         next(err)
+    }
+}
+
+
+exports.getLogs = async (req , res, next) => {
+    try{
+        let logs = await Log.findAll({ raw: true });
+        let max = logs.length;
+        for(var i = 0 ; i < max ; i++)
+            logs[i]['createdAt'] = moment(logs[i].createdAt).format('YYYY-MM-DD hh:mm A');
+        res.status(200).json(logs);
+    }catch(err){
+        next(err);
     }
 }

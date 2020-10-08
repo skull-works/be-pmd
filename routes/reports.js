@@ -33,4 +33,19 @@ router.get(
     reportsController.getCalendarReport
 );
 
+/**
+ * @swagger
+ * /logs:
+ *      post:
+ *        description: Request to fetch logs
+ *        responses: 
+ *            '201':      
+ *                description: Fetched Successfuly
+ */
+router.get(
+    '/logs',
+    isAuthenticated,
+    reportsController.getLogs
+);
+
 module.exports = router;

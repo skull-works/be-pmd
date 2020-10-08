@@ -1,5 +1,5 @@
-const { Customer, Application, Passbook, PassbookItems } = require('../models/index');
-
+const { Customer, Application, Passbook, PassbookItems, Log } = require('../models/index');
+const moment = require('moment');
 
 exports.postPassbook = async (req, res ,next) => {
     let passbook = {...req.body};
@@ -35,7 +35,7 @@ exports.postPassbookItems = async (req, res, next) => {
         res.status(200).json({
             success: true,
             message: 'Payment created successfuly',
-            passbookItem: item
+            passbookItem: item,
         });
     })
     .catch(err => {
@@ -74,4 +74,29 @@ exports.getPassbookItems = (req, res, next) => {
     .catch(err => {
         next(err);
     });
+};
+
+
+exports.delPassbookItem = async (req, res, next) => {
+    try{
+        let itemId = req.params.id;
+        let user = req.body.user;
+        let result = await PassbookItems.destroy({ where: { id: itemId } })
+        if(result === 1){
+            await Log.create({
+                user: user,
+                action: `Deleted collection ${req.params.collection}`,
+                itemType: 'passbook payment',
+                itemFormId: req.params.formId,
+                itemCreatedAt: req.params.dates_paid,
+            });
+            res.sendStatus(204);
+        }
+        else
+            res.status(422).json({
+                message: 'Unable to delete due to Id not existing'
+            })
+    }catch(err){
+        next(err);
+    }
 };

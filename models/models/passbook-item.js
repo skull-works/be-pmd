@@ -1,7 +1,7 @@
 
 module.exports = (sequelize, Sequelize) => {
     const { INTEGER, FLOAT, STRING, DATEONLY } = Sequelize;
-    const PassbookItem =sequelize.define('passbookitem' , {
+    const PassbookItem = sequelize.define('passbookitem' , {
         id: {
             type: INTEGER,
             primaryKey: true,

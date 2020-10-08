@@ -77,7 +77,48 @@ router.get(
     passbookValidation.getParamsPassbookItems,
     errorValidation,
     passbookController.getPassbookItems
-)
+);
+
+
+/**
+ * @swagger
+ * /passbook-item/{id}/{formId}/{collection}/{dates_paid}:
+ *        get:
+ *          parameters:
+ *            - name: id
+ *              description: id of payment to be deleted
+ *              in: path
+ *              required: true
+ *              schema:
+ *                type: integer
+ *            - name: formId
+ *              description: form id of payment that will deleted
+ *              in: path
+ *              required: true
+ *              schema:
+ *                type: integer
+ *            - name: collection
+ *              description: collection of the deleted payment
+ *              in: path
+ *              required: true
+ *              schema:
+ *                type: integer
+ *            - name: dates_paid
+ *              description: dates_paid of the deleted payment
+ *              in: path
+ *              required: true
+ *              schema:
+ *                type: date
+ *          description: delete a payment
+ *          responses:
+ *              '204':
+ *                description: Payment deleted
+ */
+router.delete(
+    '/passbook-item/:id/:formId/:collection/:dates_paid',
+     isAuthenticated,
+     passbookController.delPassbookItem
+);
 
 
 module.exports = router;
