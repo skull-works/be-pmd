@@ -16,6 +16,7 @@
     "sync": "node ./models/sync.js",
     "test-sync": "env-cmd ./config/test.env node ./models/sync.js",
     "dev-sync": "env-cmd ./config/dev.env  node ./models/sync.js",
+    "prod-sync": "env-cmd ./config/prod.env node ./models/sync.js",
     "docker-build": "docker build . -t mabutalid1/pmdapi:latest && docker push mabutalid1/pmdapi:latest"
   },
   "author": "Marco Butalid",
