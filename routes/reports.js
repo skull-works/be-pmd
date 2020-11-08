@@ -33,6 +33,35 @@ router.get(
     reportsController.getCalendarReport
 );
 
+
+/**
+ * @swagger
+ * /GraphReport/{areaGroup}/{startDate}/{endDate}:
+ *                post:
+ *                  parameters:
+ *                    - name: areaGroup
+ *                      description: group of customers to be fetched
+ *                      in: path
+ *                      required: true
+ *                    - name: startDate
+ *                      description: start date
+ *                      in: path
+ *                      required: true
+ *                    - name: endDate
+ *                      description: end date
+ *                      in: path
+ *                      required: true
+ *                  description: Request to fetch customer ongoing passbooks/payments
+ *                  responses: 
+ *                      '201':      
+ *                          description: Fetched Successfuly
+ */
+router.get(
+    '/GraphReport/:areaGroup/:startDate/:endDate', 
+    isAuthenticated,
+    reportsController.getCashInflowOutflow
+);
+
 /**
  * @swagger
  * /logs:
