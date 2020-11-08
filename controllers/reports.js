@@ -72,9 +72,9 @@ exports.getLogs = async (req, res, next) => {
 
 exports.getCashInflowOutflow = async (req, res, next) => {
 	let { areaGroup, startDate, endDate } = req.params;
-
+    startDate = startDate === ' ' ? moment().subtract(6, 'days').format('YYYY-MM-DD') : startDate;
+    endDate = endDate = ' ' ? moment().format('YYYY-MM-DD') : endDate;
 	const dates = getDates(startDate, endDate);
-
 	let released_attr = [];
 	let recieved_attr = [];
 
@@ -104,16 +104,15 @@ exports.getCashInflowOutflow = async (req, res, next) => {
 			raw: true,
 		});
 		if (data.length > 0) {
-			let sendData = {};
-			sendData.released = [];
-			sendData.recieved = [];
+            let sendData = [];
+            const max = dates.length;
 
-			for (const [key, value] of Object.entries(data[0])) {
-				if (key.includes('recieved')) sendData.recieved.push(value || 0);
-				else if (key.includes('released')) sendData.released.push(value || 0);
-			}
-
-			sendData.allDates = dates;
+            for ( let i = 0 ; i < max ; i++) {
+                sendData.push({});
+                sendData[i].name = dates[i];
+                sendData[i].released = data[0][`released_${dates[i]}`];
+                sendData[i].recieved = data[0][`recieved_${dates[i]}`];
+            }
 			return res.status(200).json(sendData);
 		}
 		throw { message: 'no data found' };
