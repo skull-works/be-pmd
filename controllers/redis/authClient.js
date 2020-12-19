@@ -4,6 +4,7 @@ require('dotenv').config();
 
 let redisHost = process.env.REDISHOST || process.env.HOST || 'localhost';
 let redisPort = process.env.REDISPORT || 6379;
+let redisExpire = process.env.REDISEXPIRE || 120;
 
 let redisOptions = {
     host: redisHost,
@@ -14,26 +15,40 @@ const client = redis.createClient(redisOptions);
 let get = promisify(client.get).bind(client);
 let del = promisify(client.del).bind(client);
 
-const setCLient = async (key, value) => {
+const setCLient = async (key, value, csrfToken) => {
     let getVal = await get(key);
-    if(getVal){
+    if(getVal) {
         let nil = await del(key);
         if(nil === 1){
-            return client.set(key, value, 'EX', 300, (err, value) => {
+            return client.set(key, value, 'EX', redisExpire, async (err, value) => {
                 if(err || value !== 'OK') {
                     return {error: {message: 'unable to set client and value', statusCode: 500}};
                 }
-                return true;
+                keyCsrf = key + 'Csrf';
+                let nil = await del(keyCsrf);
+                if(nil === 1) {
+                    client.set(keyCsrf, csrfToken, 'EX', redisExpire, (err, value) =>{
+                        if(err || value !== 'OK') {
+                            return {error: {message: 'unable to set client and value for csrf token in redis', statusCode: 500}};
+                        }
+                    });
+                }
+                
             });
         }
         return {error: {message: 'was not able to delete current token to replace it', statusCode: 500}};
     }
 
-    return client.set(key, value, 'EX', 60, (err, value) => {
+    return client.set(key, value, 'EX', redisExpire, (err, value) => {
         if(err || value !== 'OK') {
             return {error: {message: 'unable to set client and value', statusCode: 500}};
         }
-        return true;
+        keyCsrf = key + 'Csrf';
+        client.set(keyCsrf, csrfToken, 'EX', redisExpire, (err, value) =>{
+            if(err || value !== 'OK') {
+                return {error: {message: 'unable to set client and value for csrf token in redis', statusCode: 500}};
+            }
+        });
     });
 };
 
@@ -52,7 +67,16 @@ const isClientValid = async (key, Cookietoken) => {
                 statusCode: 403
             });
         }
-        return true
+        keyCsrf = key + 'Csrf';
+        let clientCsrf = await get(keyCsrf);
+        if(!value) {
+            throw({
+                message: 'csrf in Redis not existing!',
+                statusCode: 403
+            });
+        }
+
+        return { clientCsrf };
     }catch(err){
         return {error:err};
     }
