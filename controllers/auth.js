@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 
 const { generateAccessToken } = require('./operations/tokens');
 const { isClientValid, removeClient } = require('./redis/authClient');
@@ -71,30 +72,40 @@ exports.isLoggedIn = (req, res, next) => {
     if( req.signedCookies && req.signedCookies.token ){
         return jwt.verify(req.signedCookies.token, jwtSecret, { ignoreExpiration: true }, async (err, token) => {
             // Check if Access Token is still valid
-            if(err) return authErrors({ message: "Invalid Token", statusCode: 403}, next);
+            if (err) return authErrors({ message: "Invalid Token", statusCode: 403}, next);
 
-            // Check if Access Token expired 
-            if(Date.now() >= (token.exp * 1000)) {
+            // Check if Current Time is allowed for access
+            const format = 'hh:mm:ss';
+            const time = moment();
+            const currentTime = moment(time, format);
+            const before = moment('08:00:00', format);
+            const after = moment('19:00:59', format);
+            if (currentTime.isBetween(before, after) || token.name === 'superfe') {
+                // Check if Access Token expired 
+                if (Date.now() >= (token.exp * 1000)) {
+                    let username = token.name;
+                    console.log('checking if user still in redis - auth.js isLoggedIn Controller ...');
+                    let isValid = await isClientValid(username, req.signedCookies.token); 
+                    if(isValid.error) return authErrors(isValid.error, next);
+                    console.log('user login still in redis - auth.js isLoggedIn Controller');
+
+                    //  Generate new Access Token
+                    console.log('generating new access token in auth.js isLoggedIn Controller ...');
+                    let accessToken = await generateAccessToken({name: username, csrf: req.csrfToken()}, res);
+                    if(accessToken.error) return authErrors(accessToken.error, next);
+                    return res.status(200).json({ csrfToken: req.csrfToken(), isLoggedIn: true });
+                }
+
                 let username = token.name;
-                console.log('checking if user still in redis - auth.js isLoggedIn Controller ...');
+                console.log('checking if user accessToken still in redis - auth.js isLoggedIn Controller ...');
                 let isValid = await isClientValid(username, req.signedCookies.token); 
                 if(isValid.error) return authErrors(isValid.error, next);
-                console.log('user login still in redis - auth.js isLoggedIn Controller');
+                console.log('user accessToken still in redis - auth.js isLoggedIn Controller');
 
-                //  Generate new Access Token
-                console.log('generating new access token in auth.js isLoggedIn Controller ...');
-                let accessToken = await generateAccessToken({name: username, csrf: req.csrfToken()}, res);
-                if(accessToken.error) return authErrors(accessToken.error, next);
-                return res.status(200).json({ csrfToken: req.csrfToken(), isLoggedIn: true });
+                return res.status(200).json({ csrfToken: isValid.clientCsrf,  isLoggedIn: true });
             }
-
-            let username = token.name;
-            console.log('checking if user accessToken still in redis - auth.js isLoggedIn Controller ...');
-            let isValid = await isClientValid(username, req.signedCookies.token); 
-            if(isValid.error) return authErrors(isValid.error, next);
-            console.log('user accessToken still in redis - auth.js isLoggedIn Controller');
-
-            return res.status(200).json({ csrfToken: isValid.clientCsrf,  isLoggedIn: true });
+            console.log('Login is not within the TimeRange specified - auth.js isLoggedIn Controller ...');
+            return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
         });
     }
     return res.json({message: 'not logged in'}); 
