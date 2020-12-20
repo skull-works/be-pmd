@@ -4,7 +4,7 @@ const store = require('../redis/authClient')
 require('dotenv').config();
 
 let secret = process.env.JWTSECRET;
-let cookeAge = process.env.COOKIEAGE || 300000
+let cookeAge = process.env.COOKIEAGE || 600000
 let jwtExpire = process.env.JWTEXPIRE || '5m'
 let cookieSecure = process.env.COOKIESECURE || false;
 let cookiesOption = { httpOnly: true, secure: cookieSecure, signed: true, expires:true, maxAge: cookeAge };
@@ -25,7 +25,7 @@ exports.generateAccessToken = async (user, res) => {
     if(isEnvEmpty.error) return (isEnvEmpty);
     
     let accessToken = jwt.sign(user, secret, {expiresIn: jwtExpire});
-    let isSet = await store.setCLient(user.name, accessToken);
+    let isSet = await store.setCLient(user.name, accessToken, user.csrf);
 
     if(isSet.error)
         return({error:isSet.error});

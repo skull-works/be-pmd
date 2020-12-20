@@ -58,7 +58,7 @@ describe('Suite === Authentication Controller', function(){
                 // expect(res.body.accessToken).not.to.be.empty;
             });
             
-            it('User credentials correct should generate JWT token', async function(){
+            it('User credentials correct should return isLoggedIn true', async function(){
                 let res = await session.post('/login')
                                         .send({ username: user, password: userPassword, _csrf: csrf });
                 expect(res.statusCode).to.eq(200);
