@@ -27,7 +27,7 @@ exports.isAuthenticated = (req, res, next) => {
             }
 
             // Check if Current Time is allowed for access
-            const format = 'hh:mm:ss';
+            const format = 'HH:mm:ss';
             const time = moment();
             const currentTime = moment(time, format);
             const before = moment('08:00:00', format);
