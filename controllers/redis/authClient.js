@@ -19,23 +19,35 @@ const setCLient = async (key, value, csrfToken) => {
     let getVal = await get(key);
     if(getVal) {
         let nil = await del(key);
+        console.log('Deleting Current Token - setCLient() ...');
         if(nil === 1){
+            console.log('Deleted Current Token - setCLient() ...');
+            console.log('Setting new Token - setClient() ...');
             return client.set(key, value, 'EX', redisExpire, async (err, value) => {
                 if(err || value !== 'OK') {
+                    console.log('Unable to set client and value - setClient() ...');
                     return {error: {message: 'unable to set client and value', statusCode: 500}};
                 }
+                console.log('Setting new Token Successful - setClient() ...');
                 keyCsrf = key + 'Csrf';
                 let nil = await del(keyCsrf);
+                console.log('Deleting Current UserCsrf - setCLient() ...');
                 if(nil === 1) {
+                    console.log('Deleted Current UserCsrf - setCLient() ...');
+                    console.log('Setting UserCsrf in redis - setClient() ...');
                     client.set(keyCsrf, csrfToken, 'EX', redisExpire, (err, value) =>{
                         if(err || value !== 'OK') {
+                            console.log('Unable to set client and value for csrf token in redis - setClient() ...');
                             return {error: {message: 'unable to set client and value for csrf token in redis', statusCode: 500}};
                         }
+                        console.log('Setting new UserCsrf Successful - setClient() ...');
                     });
                 }
-                
+                console.log('Was not able to delete current UserCsrf in Redis - setCLient() ...');
+                return {error: {message: 'Was not able to delete current UserCsrf in Redis ...', statusCode: 500}};
             });
         }
+        console.log('Was not able to delete current token to replace it - setCLient() ...');
         return {error: {message: 'was not able to delete current token to replace it', statusCode: 500}};
     }
 
