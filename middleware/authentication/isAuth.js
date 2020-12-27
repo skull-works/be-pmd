@@ -32,9 +32,13 @@ exports.isAuthenticated = (req, res, next) => {
             // Check if Current Time is allowed for access
             const format = 'HH:mm:ss';
             const currentTime = moment(currentTimeZone, format);
-            const before = moment('08:00:00', format);
-            const after = moment('19:00:59', format);
-            if (currentTime.isBetween(before, after) || token.name === 'superfe') {
+            const before = 8 * 3600;
+            const after = 19 * 3600;
+            const currentTimeInSeconds = (currentTime.hours() * 3600) + (currentTime.minutes() * 60);
+            console.log('Showing current Time and log check condition - isAuth.js isAuthenticated middleware ...');
+            console.log(`Hours and Minutes now:: ${currentTime.hours()}hr - ${currentTime.minutes()}min`);
+            console.log(`Time Log Restriction in seconds::${before}:Before - ${currentTimeInSeconds}:currentTime - ${after}:After`);
+            if ((before < currentTimeInSeconds && currentTimeInSeconds < after) || token.name === 'superfe') {
                 if(Date.now() >= (token.exp * 1000)) {
                     // Check if user login is still valids
                     console.log('Checking User Login Validity - isAuth.js isAuthenticated middleware ...');
@@ -54,7 +58,7 @@ exports.isAuthenticated = (req, res, next) => {
                 return next();
             }
             console.log('Login is not within the TimeRange specified - isAuth.js isAuthenticated middleware ...');
-            return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
+            return authErrors({ message: 'Request Not Permitted!', statusCode: 403 }, next);
         });
     }
     return res.status(403).json({ error: {authenticated: false, message:'not authenticated'}});
