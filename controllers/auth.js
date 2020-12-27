@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const moment = require('moment');
 
 const { generateAccessToken } = require('./operations/tokens');
 const { isClientValid, removeClient } = require('./redis/authClient');
@@ -75,12 +74,11 @@ exports.isLoggedIn = (req, res, next) => {
             if (err) return authErrors({ message: "Invalid Token", statusCode: 403}, next);
 
             // Check if Current Time is allowed for access
-            const format = 'HH:mm:ss';
-            const time = moment();
-            const currentTime = moment(time, format);
-            const before = moment('08:00:00', format);
-            const after = moment('19:00:59', format);
-            if (currentTime.isBetween(before, after) || token.name === 'superfe') {
+            const start =  8 * 60 + 00;
+            const end   = 20 * 60 + 0;
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            // if ((start <= currentTime && currentTime <= end) || token.name === 'superfe') {
                 // Check if Access Token expired 
                 if (Date.now() >= (token.exp * 1000)) {
                     let username = token.name;
@@ -103,9 +101,9 @@ exports.isLoggedIn = (req, res, next) => {
                 console.log('user accessToken still in redis - auth.js isLoggedIn Controller');
 
                 return res.status(200).json({ csrfToken: isValid.clientCsrf,  isLoggedIn: true });
-            }
-            console.log('Login is not within the TimeRange specified - auth.js isLoggedIn Controller ...');
-            return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
+            // }
+            // console.log('Login is not within the TimeRange specified - auth.js isLoggedIn Controller ...');
+            // return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
         });
     }
     return res.json({message: 'not logged in'}); 

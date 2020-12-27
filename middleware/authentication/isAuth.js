@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const moment = require('moment');
+// const moment = require('moment');
 const { authErrors } = require('../errors/errors');
 const { isClientValid } = require('../../controllers/redis/authClient');
 const { generateAccessToken } = require('../../controllers/operations/tokens');
@@ -27,12 +27,12 @@ exports.isAuthenticated = (req, res, next) => {
             }
 
             // Check if Current Time is allowed for access
-            const format = 'HH:mm:ss';
-            const time = moment();
-            const currentTime = moment(time, format);
-            const before = moment('08:00:00', format);
-            const after = moment('19:00:59', format);
-            if (currentTime.isBetween(before, after) || token.name === 'superfe') {
+            // const format = 'HH:mm:ss';
+            // const time = moment();
+            // const currentTime = moment(time, format);
+            // const before = moment('08:00:00', format);
+            // const after = moment('19:00:59', format);
+            // if (currentTime.isBetween(before, after) || token.name === 'superfe') {
                 if(Date.now() >= (token.exp * 1000)) {
                     // Check if user login is still valids
                     console.log('Checking User Login Validity - isAuth.js isAuthenticated middleware ...');
@@ -50,9 +50,9 @@ exports.isAuthenticated = (req, res, next) => {
                 await checkValidityOfuserLogin();
 
                 return next();
-            }
-            console.log('Login is not within the TimeRange specified - isAuth.js isAuthenticated middleware ...');
-            return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
+            // }
+            // console.log('Login is not within the TimeRange specified - isAuth.js isAuthenticated middleware ...');
+            // return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
         });
     }
     return res.status(403).json({ error: {authenticated: false, message:'not authenticated'}});

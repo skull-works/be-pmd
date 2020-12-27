@@ -55,10 +55,10 @@ describe('Suite === Reports', function(){
                                                 .send({_csrf: csrf});
             expect(statusCode).to.eq(200);
             expect(body.allDates).not.to.be.empty;
-            expect(body.customerPayments[1]).to.have.property('passbook');                 //application 6
-            expect(body.customerPayments[1].passbook).to.have.property('passbookitems');
-            expect(body.customerPayments[2]).to.have.property('passbook');                 //application 7
+            expect(body.customerPayments[2]).to.have.property('passbook');                 //application 6
             expect(body.customerPayments[2].passbook).to.have.property('passbookitems');
+            expect(body.customerPayments[3]).to.have.property('passbook');                 //application 7
+            expect(body.customerPayments[3].passbook).to.have.property('passbookitems');
         });
 
         it('No Payments retrieved from applications should return null passbook property', async function(){

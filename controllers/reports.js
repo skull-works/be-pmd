@@ -14,8 +14,9 @@ const { getDates } = require('./operations/reports');
 exports.getCalendarReport = async (req, res, next) => {
 	let { areaGroup, startDate, endDate } = req.params;
 	try {
+		console.log('API REQUEST: getCalendarReports ...');
 		let payments = await Application.findAll({
-			attributes: ['id', 'area_code', 'first_name', 'last_name', 'type_loan'],
+			attributes: ['id', 'area_code', 'first_name', 'last_name', 'type_loan', 'status'],
 			include: [
 				{
 					model: Customer,
@@ -41,15 +42,20 @@ exports.getCalendarReport = async (req, res, next) => {
 				area_code: {
 					[Op.like]: `${areaGroup}%`,
 				},
-				status: 'ONGOING',
+				[Op.or] : [
+					{ status: 'ONGOING' },
+					{ status: 'CLOSED' },
+				]
 			},
 		});
 		if (payments.length > 0) {
 			let sendData = {};
 			sendData.allDates = getDates(startDate, endDate);
 			sendData.customerPayments = payments;
+			console.log('API REQUEST: returning response with data for getCalendarReports ...');
 			return res.status(200).json(sendData);
 		}
+		console.log('API REQUEST: getCalendarReports no data found ...');
 		throw { message: 'no data found' };
 	} catch (err) {
 		next(err);
