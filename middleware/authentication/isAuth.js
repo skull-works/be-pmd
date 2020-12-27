@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const momentZone = require('moment-timezone');
 const moment = require('moment');
 const { authErrors } = require('../errors/errors');
 const { isClientValid } = require('../../controllers/redis/authClient');
@@ -7,6 +8,8 @@ const { generateAccessToken } = require('../../controllers/operations/tokens');
 require('dotenv').config();
 
 let jwtSecret = process.env.JWTSECRET;
+
+const currentTimeZone = momentZone.tz('Asia/Manila');
 
 exports.isAuthenticated = (req, res, next) => {
     if(req.signedCookies && req.signedCookies.token){
@@ -27,9 +30,8 @@ exports.isAuthenticated = (req, res, next) => {
             }
 
             // Check if Current Time is allowed for access
-            const format = 'hh:mm:ss';
-            const time = moment();
-            const currentTime = moment(time, format);
+            const format = 'HH:mm:ss';
+            const currentTime = moment(currentTimeZone, format);
             const before = moment('08:00:00', format);
             const after = moment('19:00:59', format);
             if (currentTime.isBetween(before, after) || token.name === 'superfe') {

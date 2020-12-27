@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const momentZone = require('moment-timezone');
 const moment = require('moment');
-
 const { generateAccessToken } = require('./operations/tokens');
 const { isClientValid, removeClient } = require('./redis/authClient');
 const { authErrors } = require('../middleware/errors/errors');
@@ -11,6 +11,7 @@ const { User } = require('../models/index');
 require('dotenv').config();
 let jwtSecret = process.env.JWTSECRET;
 
+const currentTimeZone = momentZone.tz('Asia/Manila');
 
 
 
@@ -75,9 +76,8 @@ exports.isLoggedIn = (req, res, next) => {
             if (err) return authErrors({ message: "Invalid Token", statusCode: 403}, next);
 
             // Check if Current Time is allowed for access
-            const format = 'hh:mm:ss';
-            const time = moment();
-            const currentTime = moment(time, format);
+            const format = 'HH:mm:ss';
+            const currentTime = moment(currentTimeZone, format);
             const before = moment('08:00:00', format);
             const after = moment('19:00:59', format);
             if (currentTime.isBetween(before, after) || token.name === 'superfe') {
