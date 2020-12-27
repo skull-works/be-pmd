@@ -17,7 +17,8 @@
 		"test:sync": "env-cmd ./config/test.env node ./models/sync.js",
 		"dev:sync": "env-cmd ./config/dev.env  node ./models/sync.js",
 		"prod:sync": "env-cmd ./config/prod.env node ./models/sync.js",
-		"docker:build": "docker build . -t mabutalid1/pmdapi:latest && docker push mabutalid1/pmdapi:latest"
+		"docker:deploy": "docker build . -t mabutalid1/pmdapi:latest && docker push mabutalid1/pmdapi:latest",
+		"docker:build": "docker build . -t mabutalid1/pmdapi:latest"
 	},
 	"author": "Marco Butalid",
 	"license": "ISC",
@@ -33,6 +34,7 @@
 		"iso-datestring-validator": "2.0.5",
 		"jsonwebtoken": "^8.5.1",
 		"moment": "^2.29.1",
+		"moment-timezone": "^0.5.32",
 		"mysql2": "^2.1.0",
 		"redis": "^3.0.2",
 		"sequelize": "^6.3.0",
