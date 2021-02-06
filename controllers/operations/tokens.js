@@ -26,7 +26,7 @@ exports.generateAccessToken = async (user, res) => {
     
     let accessToken = jwt.sign(user, secret, {expiresIn: jwtExpire});
     let isSet = await store.setCLient(user.name, accessToken, user.csrf);
-
+    
     if(isSet.error)
         return({error:isSet.error});
 

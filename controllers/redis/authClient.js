@@ -43,8 +43,10 @@ const setCLient = async (key, value, csrfToken) => {
                         console.log('Setting new UserCsrf Successful - setClient() ...');
                     });
                 }
-                console.log('Was not able to delete current UserCsrf in Redis - setCLient() ...');
-                return {error: {message: 'Was not able to delete current UserCsrf in Redis ...', statusCode: 500}};
+                else {
+                    console.log('Was not able to delete current UserCsrf in Redis - setCLient() ...');
+                    return {error: {message: 'Was not able to delete current UserCsrf in Redis ...', statusCode: 500}};
+                }
             });
         }
         console.log('Was not able to delete current token to replace it - setCLient() ...');
