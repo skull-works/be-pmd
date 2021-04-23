@@ -127,8 +127,14 @@ exports.getApplicationDetails = (req, res, next) => {
 
 
 exports.updateApplication = async (req,res,next) => {
+    if (req.body.fieldName === 'area_code') {
+        const customer = await Customer.findOne({ where: { area_code: req.body.fieldValue }  });
+        if (customer) return Errors.standardError('Update application', 'area_code already used by another customer', next);  
+    }
+
     let Model, Message;
     let Includes = ['id',`${req.body.fieldName}`];
+
     switch (req.body.updateType){
         case "both":
             Message = "Updated Customer";
