@@ -4,7 +4,6 @@ require('dotenv').config();
 
 let redisHost = process.env.REDISHOST || process.env.HOST || 'localhost';
 let redisPort = process.env.REDISPORT || 6379;
-let redisExpire = process.env.REDISEXPIRE || 120;
 
 let redisOptions = {
     host: redisHost,
@@ -14,56 +13,20 @@ let redisOptions = {
 const client = redis.createClient(redisOptions);
 let get = promisify(client.get).bind(client);
 let del = promisify(client.del).bind(client);
+let set = promisify(client.set).bind(client);
 
-const setCLient = async (key, value, csrfToken) => {
-    let getVal = await get(key);
-    if(getVal) {
-        let nil = await del(key);
-        console.log('Deleting Current Token - setCLient() ...');
-        if(nil === 1){
-            console.log('Deleted Current Token - setCLient() ...');
-            console.log('Setting new Token - setClient() ...');
-            return client.set(key, value, 'EX', redisExpire, async (err, value) => {
-                if(err || value !== 'OK') {
-                    console.log('Unable to set client and value - setClient() ...');
-                    return {error: {message: 'unable to set client and value', statusCode: 500}};
-                }
-                console.log('Setting new Token Successful - setClient() ...');
-                keyCsrf = key + 'Csrf';
-                let nil = await del(keyCsrf);
-                console.log('Deleting Current UserCsrf - setCLient() ...');
-                if(nil === 1) {
-                    console.log('Deleted Current UserCsrf - setCLient() ...');
-                    console.log('Setting UserCsrf in redis - setClient() ...');
-                    client.set(keyCsrf, csrfToken, 'EX', redisExpire, (err, value) =>{
-                        if(err || value !== 'OK') {
-                            console.log('Unable to set client and value for csrf token in redis - setClient() ...');
-                            return {error: {message: 'unable to set client and value for csrf token in redis', statusCode: 500}};
-                        }
-                        console.log('Setting new UserCsrf Successful - setClient() ...');
-                    });
-                }
-                else {
-                    console.log('Was not able to delete current UserCsrf in Redis - setCLient() ...');
-                    return {error: {message: 'Was not able to delete current UserCsrf in Redis ...', statusCode: 500}};
-                }
-            });
-        }
-        console.log('Was not able to delete current token to replace it - setCLient() ...');
-        return {error: {message: 'was not able to delete current token to replace it', statusCode: 500}};
+const setCLient = async (key, value) => {
+    try {
+        // delete value if existing
+        let getVal = await get(key);
+        if (getVal) await del(key);
+        
+        // store in redis
+        await set(key, value);
+        return true;
+    } catch (err) {
+        return {error: {error: true, message: 'Something went wrong in inserting to redis when login'}};
     }
-
-    return client.set(key, value, 'EX', redisExpire, (err, value) => {
-        if(err || value !== 'OK') {
-            return {error: {message: 'unable to set client and value', statusCode: 500}};
-        }
-        keyCsrf = key + 'Csrf';
-        client.set(keyCsrf, csrfToken, 'EX', redisExpire, (err, value) =>{
-            if(err || value !== 'OK') {
-                return {error: {message: 'unable to set client and value for csrf token in redis', statusCode: 500}};
-            }
-        });
-    });
 };
 
 const isClientValid = async (key, Cookietoken) => {

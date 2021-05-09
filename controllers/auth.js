@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const momentZone = require('moment-timezone');
 const moment = require('moment');
-const { generateAccessToken } = require('./operations/tokens');
+const { generateAccessToken, generateRefreshToken } = require('./operations/tokens');
 const { isClientValid, removeClient } = require('./redis/authClient');
 const { authErrors } = require('../middleware/errors/errors');
 const { User } = require('../models/index');
@@ -26,6 +26,9 @@ exports.signUp = async (req, res, next) => {
     try{
         let signUpInfo = req.body;
         let hashPass = await bcrypt.hash(signUpInfo.password, 12);
+        let isUserExist = await User.findOne({ where: { username: signUpInfo.username }});
+        if (isUserExist) return res.json({success:false, message: "User already existing"});
+
         let user = await User.create({
             username: signUpInfo.username,
             password: hashPass,
@@ -45,7 +48,6 @@ exports.signUp = async (req, res, next) => {
 exports.Login = async (req, res, next) => {
     let username = req.body.username;
     let password = req.body.password;
-    let jwtCSRF = req.headers['x-csrf-token'] || req.body._csrf;
     try{
         // Step 1 Extract user from database
         let user = await User.findOne({ where:{ username: username }});
@@ -56,11 +58,13 @@ exports.Login = async (req, res, next) => {
         if(!doMatch) throw ({message: 'wrong password', statusCode: 403});
 
         // Step 3 create jwt token
-        let token = { name: username, csrf: jwtCSRF};
+        let token = { name: username };
         let accessToken = await generateAccessToken(token, res);
+        let refreshToken = await generateRefreshToken(token, res);
  
         if(accessToken.error) return authErrors(accessToken.error, next);
-        else res.status(200).json({isLoggedIn: true, message: 'Login successful'});
+        if(refreshToken.error) return authErrors(refreshToken.error, next);
+        res.status(200).json({isLoggedIn: true, message: 'Login successful'});
     }catch(err){
         next(err);
     }

@@ -25,7 +25,11 @@ router.get(
  *        post:
  *          parameters:
  *            - name: username
- *              description: Sign up info
+ *              description: username to register for user
+ *              in: body
+ *              required: true
+ *            - name: password
+ *              description: password for user to register
  *              in: body
  *              required: true
  *          description: register user
