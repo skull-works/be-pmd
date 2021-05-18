@@ -6,21 +6,21 @@ const { generateAccessToken, generateRefreshToken } = require('./operations/toke
 const { isClientValid, removeClient } = require('./redis/authClient');
 const { authErrors } = require('../middleware/errors/errors');
 const { User } = require('../models/index');
-
+const { promisify } = require('util');
+const Logger = require('../utility/logger');
 
 require('dotenv').config();
-let jwtSecret = process.env.JWTSECRET;
+let accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
+let refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
 
 const currentTimeZone = momentZone.tz('Asia/Manila');
+let verifyToken = promisify(jwt.verify).bind(jwt);
 
 
 
 exports.generateCSRF = (req, res) => {
     res.status(200).json({csrfToken: req.csrfToken()});
 };
-
-
-
 
 exports.signUp = async (req, res, next) => {
     try{
@@ -37,7 +37,7 @@ exports.signUp = async (req, res, next) => {
         if(!user) throw({message: "unable to create user"});
         return res.status(200).json({success:true, message: "User created Successfuly"});
     }catch(err){
-        console.log(err);
+        Logger.info(err);
         next(err);
     }
 };
@@ -70,78 +70,31 @@ exports.Login = async (req, res, next) => {
     }
 };
 
-
-
-
-exports.isLoggedIn = (req, res, next) => {
-    if( req.signedCookies && req.signedCookies.token ){
-        return jwt.verify(req.signedCookies.token, jwtSecret, { ignoreExpiration: true }, async (err, token) => {
-            // Check if Access Token is still valid
-            if (err) return authErrors({ message: "Invalid Token", statusCode: 403}, next);
-
-            // Check if Current Time is allowed for access
-            const format = 'HH:mm:ss';
-            const currentTime = moment(currentTimeZone, format);
-            const before = 8 * 3600;
-            const after = 19 * 3600;
-            const currentTimeInSeconds = (currentTime.hours() * 3600) + (currentTime.minutes() * 60);
-            console.log('Showing current Time and log check condition - auth.js isLoggedIn Controller ...');
-            console.log(`Hours and Minutes now:: ${currentTime.hours()}hr - ${currentTime.minutes()}min`);
-            console.log(`Time Log Restriction in seconds::${before}:Before - ${currentTimeInSeconds}:currentTime - ${after}:After`);
-            if ((before < currentTimeInSeconds && currentTimeInSeconds < after) || token.name === 'superfe') {
-                // Check if Access Token expired 
-                if (Date.now() >= (token.exp * 1000)) {
-                    let username = token.name;
-                    console.log('checking if user still in redis - auth.js isLoggedIn Controller ...');
-                    let isValid = await isClientValid(username, req.signedCookies.token); 
-                    if(isValid.error) return authErrors(isValid.error, next);
-                    console.log('user login still in redis - auth.js isLoggedIn Controller');
-
-                    //  Generate new Access Token
-                    console.log('generating new access token in auth.js isLoggedIn Controller ...');
-                    let accessToken = await generateAccessToken({name: username, csrf: req.csrfToken()}, res);
-                    if(accessToken.error) return authErrors(accessToken.error, next);
-                    return res.status(200).json({ csrfToken: req.csrfToken(), isLoggedIn: true });
-                }
-
-                let username = token.name;
-                console.log('checking if user accessToken still in redis - auth.js isLoggedIn Controller ...');
-                let isValid = await isClientValid(username, req.signedCookies.token); 
-                if(isValid.error) return authErrors(isValid.error, next);
-                console.log('user accessToken still in redis - auth.js isLoggedIn Controller');
-
-                return res.status(200).json({ csrfToken: isValid.clientCsrf,  isLoggedIn: true });
-            }
-            console.log('Login is not within the TimeRange specified - auth.js isLoggedIn Controller ...');
-            return authErrors({ message: 'Login Not Permitted!', statusCode: 403 }, next);
-        });
-    }
-    return res.json({message: 'not logged in'}); 
-}
-
-
-
-
-exports.willLogout = (req, res, next) => {
+exports.willLogout = async (req, res, next) => {
+    Logger.info('=====[Function - willLogout]=====');
     if( req.signedCookies || req.cookies ){
-        if( req.signedCookies.token ){
-            return jwt.verify(req.signedCookies.token, jwtSecret, { ignoreExpiration: true }, async (err , token) => {
-                let key = token.name;
-                console.log('user logging out ...')
-                let isLoggedOut = await removeClient(key);  
-                console.log('user logged out.')
-                return res.status(200).json(isLoggedOut);
-            });
+
+        if ( req.signedCookies.accessToken && req.signedCookies.refresToken){
+            const accessToken = req.signedCookies.accessToken;
+            const refreshToken = req.signedCookies.refresToken;
+
+            Logger.info('Removing access token from redis');
+            const verifiedAccessToken = await verifyToken(accessToken, accessTokenSecret, { ignoreExpiration: true });
+            let logoutAccessTokenResult = await removeClient(`AccessToken#${verifiedAccessToken.name}`);
+
+            Logger.info('Removing refresh token from redis');
+            const verifiedRefreshToken = await verifyToken(refreshToken, refreshTokenSecret, { ignoreExpiration: true });
+            let logoutRefreshTokenResult = await removeClient(`RefreshToken#${verifiedRefreshToken.name}`);
+
+            if (!logoutAccessTokenResult.logout || !logoutRefreshTokenResult.logout)
+                return res.status(200).json({ logout: false, message: 'unable to logout' });
+            
+            return res.status(200).json({ logout: true, message: 'User logged out' });
         }
-        else if( req.signedCookies.token !== undefined || req.cookies.token !== undefined ){
-            return res.status(422).json({ warning: true, 
-                message: 'Your account session has been tampered!, kindly login in another browser then log out from there' 
-            });
-        }
-        else{
-            console.log('user already logged out.')
+        else {
+            Logger.info('user already logged out.')
             return res.status(200).json({ message: "User already logged out" });
         }
     }
-    return res.status(422).json({ message: "User already logged out and possibly an invalid user" });
+    return res.status(422).json({ message: "Invalid user - accessing without the cookies for the tokens" });
 };

@@ -1,0 +1,679 @@
+[2021-05-19 00:34:44.125 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.127 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.128 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.128 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.131 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.144 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.144 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.144 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.146 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.149 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.158 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.159 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.159 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.159 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.161 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.167 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.167 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.167 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.167 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.169 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.174 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.174 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.174 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.175 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.177 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.670 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.670 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.670 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.670 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.672 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.682 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.682 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.682 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.682 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.684 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.690 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.691 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.691 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.691 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.693 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.700 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.700 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.700 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.700 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.702 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.709 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.709 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.709 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.709 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.711 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.718 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.718 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.718 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.718 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.720 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.727 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.728 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.728 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.728 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.730 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.736 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.737 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.737 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.737 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.739 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.747 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.747 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.747 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.747 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.749 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.755 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.755 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.755 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.755 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.757 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.763 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.763 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.763 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.763 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.765 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.770 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.770 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.770 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.770 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.772 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.777 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.777 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.777 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.777 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.779 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.784 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.784 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.784 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.784 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.786 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:44.793 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:44.793 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:44.793 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:44.793 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:44.795 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.283 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.283 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.283 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.283 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.285 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.311 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.312 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.312 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.312 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.314 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.354 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.354 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.354 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.354 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.356 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.387 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.387 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.388 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.388 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.389 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.419 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.420 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.420 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.420 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.422 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.443 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.444 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.444 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.444 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.446 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.459 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.460 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.460 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.460 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.462 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.468 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.468 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.468 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.468 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.470 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.475 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.475 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.475 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.475 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.478 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.483 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.483 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.483 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.483 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.486 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.492 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.492 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.492 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.493 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.495 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.517 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.517 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.517 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.517 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.520 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.525 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.525 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.525 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.525 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.527 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.537 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.537 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.537 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.537 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.540 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.548 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.548 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.548 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.548 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.550 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.558 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.558 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.558 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.558 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.560 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.569 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.569 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.569 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.569 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.572 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.579 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.579 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.579 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.579 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.581 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.589 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.589 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.589 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.589 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.592 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.601 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.601 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.601 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.601 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.604 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.613 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.613 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.613 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.613 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.615 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.622 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.622 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.622 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.622 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.624 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.632 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.632 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.632 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.632 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.635 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.645 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.645 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.645 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.645 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.648 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.656 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.656 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.657 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.657 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.658 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.667 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.667 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.667 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.667 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.670 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.679 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.679 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.679 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.679 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.681 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.688 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.688 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.688 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.688 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.690 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.698 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.698 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.698 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.698 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.700 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.708 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.708 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.708 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.708 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.710 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.717 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.718 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.718 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.718 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.720 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.728 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.728 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.728 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.728 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.730 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.737 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.737 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.737 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.737 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.739 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.746 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.746 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.746 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.746 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.749 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.756 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.756 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.756 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.756 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.758 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.765 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.765 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.766 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.766 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.767 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.774 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.774 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.774 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.774 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.776 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.782 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.782 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.782 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.782 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.784 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.790 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.790 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.791 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.791 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.792 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.798 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.798 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.798 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.798 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.801 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.808 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.808 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.808 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.808 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.810 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:45.818 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:45.818 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:45.818 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:45.818 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:45.820 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.337 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.337 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.337 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.337 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.339 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.361 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.361 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.361 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.361 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.364 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.382 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.382 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.382 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.382 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.385 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.406 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.407 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.407 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.407 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.409 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.424 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.424 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.425 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.425 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.426 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.441 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.441 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.441 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.441 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.443 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.460 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.460 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.460 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.460 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.462 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.476 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.476 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.476 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.476 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.478 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.492 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.492 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.492 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.492 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.500 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.512 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.512 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.512 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.512 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.514 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.526 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.526 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.526 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.526 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.528 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.541 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.542 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.542 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.542 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.544 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.557 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.557 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.557 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.557 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.559 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.571 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.571 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.571 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.571 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.573 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.585 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.585 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.585 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.585 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.588 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.602 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.602 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.602 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.602 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.605 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.619 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.620 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.620 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.620 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.623 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.640 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.640 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.640 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.640 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.643 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.659 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.659 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.659 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.659 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.661 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.677 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.677 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.677 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.677 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.678 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.693 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.693 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.693 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.693 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.694 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.706 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.706 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.706 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.706 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.709 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.719 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.719 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.719 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.719 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.721 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.732 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.732 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.732 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.732 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.734 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.745 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.745 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.745 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.745 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.747 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.755 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.756 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.756 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.756 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.758 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.768 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.768 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.768 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.768 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.770 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.783 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.783 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.783 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.783 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.785 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.799 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.799 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.799 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.799 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.801 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.814 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.814 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.814 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.814 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.816 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.828 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.828 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.828 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.828 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.830 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.843 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.843 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.843 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.843 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.845 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.857 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.857 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.857 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.857 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.859 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.870 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.871 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.871 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.871 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.873 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.883 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.884 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.884 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.884 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.886 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.899 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.899 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.899 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.899 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.900 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:46.911 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:46.911 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:46.911 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:46.911 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:46.913 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:47.861 +0800] [32mINFO[39m: [36m=====[Function - willLogout]=====[39m
+[2021-05-19 00:34:47.861 +0800] [32mINFO[39m: [36mRemoving access token from redis[39m
+[2021-05-19 00:34:47.874 +0800] [32mINFO[39m: [36mRemoving refresh token from redis[39m
+[2021-05-19 00:34:47.882 +0800] [32mINFO[39m: [36m=====[Function - willLogout]=====[39m
+[2021-05-19 00:34:47.882 +0800] [32mINFO[39m: [36muser already logged out.[39m
+[2021-05-19 00:34:48.348 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:48.348 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:48.348 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:48.348 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:48.350 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:48.358 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:48.358 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:48.599 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:48.600 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:48.600 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:48.600 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:48.841 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:48.841 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:48.841 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:48.841 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.350 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.350 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.351 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.351 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.353 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.379 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.379 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.379 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.379 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.381 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.400 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.400 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.400 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.400 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.402 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.409 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.409 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.409 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.409 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.411 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.417 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.417 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.418 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.418 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.420 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.426 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.426 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.426 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.426 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.428 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.443 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.443 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.444 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.444 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.446 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.456 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.456 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.456 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.456 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.458 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.476 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.476 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.476 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.476 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.478 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.483 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.483 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.483 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.483 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.485 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.488 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.489 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.489 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.489 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.491 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.495 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.495 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.495 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.495 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.497 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.500 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.501 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.501 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.501 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.503 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.507 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.507 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.507 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.508 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.510 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.514 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.514 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.514 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.514 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.516 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.520 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.520 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.520 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.520 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.522 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.531 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.531 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.531 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.531 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.533 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.538 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.538 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.538 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.538 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.540 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.546 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.546 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.546 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.546 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.548 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.551 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.551 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.551 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.551 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.553 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.563 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.564 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.564 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.564 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.566 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.579 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.580 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.580 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.580 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.583 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.587 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.587 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.587 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.587 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.589 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.593 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.593 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.593 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.593 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.595 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.598 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.599 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.599 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.599 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.601 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:49.605 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:49.605 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:49.605 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:49.605 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:49.608 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.117 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:50.117 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:50.117 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:50.117 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:50.119 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.137 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:50.137 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:50.137 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:50.137 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:50.139 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.149 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:50.149 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:50.149 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:50.149 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:50.151 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.166 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:50.166 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:50.166 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:50.168 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:50.170 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.181 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:50.181 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:50.181 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:50.181 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:50.183 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.183 +0800] [32mINFO[39m: [36m====[Function - getCalendarReport]====[39m
+[2021-05-19 00:34:50.200 +0800] [32mINFO[39m: [36mreturning response with data for getCalendarReports ...[39m
+[2021-05-19 00:34:50.206 +0800] [32mINFO[39m: [36m=====[Function - isAuthenticated]=====[39m
+[2021-05-19 00:34:50.206 +0800] [32mINFO[39m: [36mAuthenticating[39m
+[2021-05-19 00:34:50.207 +0800] [32mINFO[39m: [36m=====[Function - validateCurrentAccessToken]=====[39m
+[2021-05-19 00:34:50.207 +0800] [32mINFO[39m: [36mValidating current access token[39m
+[2021-05-19 00:34:50.209 +0800] [32mINFO[39m: [36mCurrent access token valid[39m
+[2021-05-19 00:34:50.209 +0800] [32mINFO[39m: [36m====[Function - getCalendarReport]====[39m
+[2021-05-19 00:34:50.213 +0800] [32mINFO[39m: [36mreturning response with data for getCalendarReports ...[39m

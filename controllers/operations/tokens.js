@@ -7,14 +7,14 @@ let cookieSecure = process.env.COOKIESECURE || false;
 
 // access token
 let accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
-let jwtAccessTokenExpire = process.env.JWT_ACCESS_TOKEN_EXPIRE || '20s'
-let accessTokenCookieAge = process.env.ACCESS_TOKEN_COOKIE_AGE || 20000
+let jwtAccessTokenExpire = process.env.JWT_ACCESS_TOKEN_EXPIRE || '30s'
+let accessTokenCookieAge = process.env.ACCESS_TOKEN_COOKIE_AGE || 120000
 let accessTokenCookieOptions = { httpOnly: true, secure: cookieSecure, signed: true, expires:true, maxAge: accessTokenCookieAge };
 
 // refresh token
 let refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
-let jwtRefreshTokenExpire = process.env.JWT_ACCESS_TOKEN_EXPIRE || '30s'
-let refreshTokenCookieAge = process.env.REFRESH_TOKEN_COOKIE_AGE || 30000
+let jwtRefreshTokenExpire = process.env.JWT_REFRESH_TOKEN_EXPIRE || '60s'
+let refreshTokenCookieAge = process.env.REFRESH_TOKEN_COOKIE_AGE || 120000
 let refreshTokeCookieOptions = { httpOnly: true, secure: cookieSecure, signed: true, expires:true, maxAge: refreshTokenCookieAge };
 
 
@@ -29,8 +29,6 @@ const envVarCheck = () => {
     if(!refreshTokeCookieOptions) return({error: {error: true, message: 'refreshTokeCookieOptions option is not set'}});
     return false;
 }
-
-
 
 exports.generateAccessToken = async (user, res) => {
     let isEnvEmpty = envVarCheck();

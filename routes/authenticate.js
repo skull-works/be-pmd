@@ -62,22 +62,6 @@ router.post(
     authController.Login
 );
 
-
-/**
- * @swagger
- * /isLoggedIn:
- *        post:
- *          description: Check if user still logged in and generate new Access Token
- *          responses:
- *              '200':
- *                description: generate new Access Token if User still Logged In
- */
-router.get(
-    '/isLoggedIn',
-    authController.isLoggedIn
-);
-
-
 /**
  * @swagger
  * /logout:

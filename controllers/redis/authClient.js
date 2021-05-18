@@ -29,33 +29,17 @@ const setCLient = async (key, value) => {
     }
 };
 
-const isClientValid = async (key, Cookietoken) => {
+const isClientValid = async (key) => {
     try{
         let value = await get(key);
         if(!value) {
             throw({
-                message: 'Session timed out, kindly login again',
-                statusCode: 403
+                message: 'Session timed out, kindly login again'
             });
         }
-        if(value !== Cookietoken){ // if token already used
-            throw({
-                message: 'Login seems to be used already, kindly login ASAP and contact system administrator',
-                statusCode: 403
-            });
-        }
-        keyCsrf = key + 'Csrf';
-        let clientCsrf = await get(keyCsrf);
-        if(!value) {
-            throw({
-                message: 'csrf in Redis not existing!',
-                statusCode: 403
-            });
-        }
-
-        return { clientCsrf };
+        return { getValue: value };
     }catch(err){
-        return {error:err};
+        return { error:err };
     }
 }
 
@@ -64,12 +48,13 @@ const removeClient = async (key) => {
         let getVal = await get(key);
         if(getVal){
             let nil = await del(key);
-            if( nil === 1 ){
-                return { logout: true, message: "User is logged out" };
-            }
-            return { logout: false, message: "Something went wrong, User was unable be logged out, contact administrator" };
+
+            if( nil === 1 )
+                return { logout: true };
+            
+            return { logout: false };
         }
-        return { message: "User already logged out" };
+        return { logout: true };
     }catch(err){
         return {error: err}
     }
