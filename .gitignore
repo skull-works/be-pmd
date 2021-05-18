@@ -7,3 +7,4 @@
 /.mocharc.js
 /mochawesome-report
 /request.rest
+./logs/*
