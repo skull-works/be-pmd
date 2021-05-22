@@ -62,6 +62,7 @@ router.post(
     authController.Login
 );
 
+
 /**
  * @swagger
  * /logout:
@@ -79,6 +80,21 @@ router.post(
 router.get(
     '/logout',
     authController.willLogout
+)
+
+
+/**
+ * @swagger
+ * /isStillAuthenticated:
+ *        post:
+ *          description: Request to check if user is still authenticated
+ *          responses:
+ *              '200':
+ *                description: user is still authenticated
+ */
+ router.get(
+    '/isStillAuthenticated',
+    authController.isStillAuthenticated
 )
 
 

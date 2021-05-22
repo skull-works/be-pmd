@@ -34,6 +34,7 @@ const isClientValid = async (key) => {
         let value = await get(key);
         if(!value) {
             throw({
+                authenticated: false,
                 message: 'Session timed out, kindly login again'
             });
         }

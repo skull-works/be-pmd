@@ -147,5 +147,44 @@ describe('Suite === Authentication Controller', function(){
         });
     });
 
+    context('IsStillAuthenticated', function(){
+        let key = "testAdmin3", userPassword = "testPassword3";
+        let dateNow = dateToday();
 
+        before(async function(){
+            //creating login user
+            await createLoginUser(key, userPassword);
+        })
+
+        beforeEach(async function(){
+            let { newSession, csurf } = await createSession();
+            csrf = csurf;
+            session = newSession;
+        });
+
+        it('should return authenticated is true', async function() {
+            await Login(session, key, userPassword, csrf);
+            let { body, statusCode } = await session
+                                            .get(`/isStillAuthenticated`)
+                                            .send({_csrf:csrf});
+            expect(statusCode).to.eql(200);
+            expect(body.authenticated).to.eql(true);
+            expect(body.message).to.eql("User is still authenticated");
+        });
+
+        it('should return sessioned time out and authenticated false', async function() {
+            await Login(session, key, userPassword, csrf);
+
+            await del(`AccessToken#${key}`);
+            await del(`RefreshToken#${key}`);
+
+            let { body, statusCode } = await session
+                                            .get(`/isStillAuthenticated`)
+                                            .send({_csrf:csrf});
+
+            expect(statusCode).to.eql(401);
+            expect(body.authenticated).to.eql(false);
+            expect(body.message).to.eql("Session timed out, kindly login again");
+        });
+    })
 })
