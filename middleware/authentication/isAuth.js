@@ -32,14 +32,15 @@ const regenerateAccessTokenThroughValidatingRefreshToken = async (res, next, ref
         // Generate New AccessToken
         await generateAccessToken({ name: verifyRefreshToken.name }, res);
 
+        Logger.info('User is Authenticated');
         return next();
     } catch (err) {
         if (err.toString() === 'TokenExpiredError: jwt expired') { 
             Logger.info('Unable to create new access token');
             Logger.info('Refresh Token Expired');
-            return res.status(401).json({ error: {authenticated: false, message:'Session timed out, kindly login again'}});
+            return res.status(401).json({authenticated: false, message:'Session timed out, kindly login again'});
         }
-        return res.status(401).json({ error: {authenticated: false, ...err }});
+        return res.status(401).json({authenticated: false, ...err });
     }
 }
 
@@ -65,14 +66,17 @@ exports.isAuthenticated = async (req, res, next) => {
         const accessToken = req.signedCookies.accessToken;
         try {
             const { authenticated } = await validateCurrentAccessToken(accessToken);
-            if (authenticated) return next();
+            if (authenticated) {
+                Logger.info('User is Authenticated');
+                return next();
+            }
         } catch (error) {
             if (error.toString() === 'TokenExpiredError: jwt expired') {
                 const refreshToken = req.signedCookies.refresToken;
                 return regenerateAccessTokenThroughValidatingRefreshToken(res, next, refreshToken);
             }
-            return res.status(401).json({ error: {authenticated: false, ...error}});
+            return res.status(401).json({authenticated: false, ...error});
         }
     }
-    return res.status(401).json({ error: {authenticated: false, message:'not authenticated'}});
+    return res.status(401).json({authenticated: false, message:'not authenticated'});
 };

@@ -116,7 +116,7 @@ describe('Suite === Authentication Controller', function(){
                                             .get(`/application_form/2020-08-13/${dateNow}`)
                                             .send({_csrf:csrf});
             expect(statusCode).to.eql(401);
-            expect(body.error.message).to.eql('not authenticated');
+            expect(body.message).to.eql('not authenticated');
         });
 
         it('JWT token does not exist in redis server return 401 status code', async function() {
@@ -129,7 +129,7 @@ describe('Suite === Authentication Controller', function(){
                             .send({_csrf: csrf});
             }
             expect(res.statusCode).to.eq(401);
-            expect(res.body.error.message).to.eql('Session timed out, kindly login again');
+            expect(res.body.message).to.eql('Session timed out, kindly login again');
         });
 
         it('JWT does not match redis token value', async function() {
@@ -143,7 +143,7 @@ describe('Suite === Authentication Controller', function(){
                         .send({_csrf: csrf});
 
             expect(res.statusCode).to.eq(401);
-            expect(res.body.error.message).to.eql('Access Token did not match!!!!');
+            expect(res.body.message).to.eql('Access Token did not match!!!!');
         });
     });
 
