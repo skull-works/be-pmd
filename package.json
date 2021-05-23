@@ -8,7 +8,7 @@
 		"test": "env-cmd ./config/test.env mocha --recursive --watch --unhandled-rejections=strict --reporter min",
 		"dev": "env-cmd ./config/dev.env nodemon",
 		"prod": "env-cmd ./config/prod.env nodemon",
-		"up:dev": " docker run --rm --name my-pmdapi --env HOST=host.docker.internal --env REDISPORT=6379 --env DBNAME=pmd_local --env USER=root --env PASS=12345 --env JWTSECRET=devSecret --health-cmd \"curl http://localhost:9000/health || exit 1\" --rm -d -p 9000:9000/tcp mabutalid1/pmdapi:latest",
+		"up:dev": " docker run --rm --name my-pmdapi --env-file ./config/docker-dev.env --health-cmd \"curl http://localhost:9000/health || exit 1\" --rm -p 9000:9000/tcp mabutalid1/pmdapi:latest",
 		"up:test": "docker run --name my-pmdapi --env HOST=pmd-test.cgn2g7z9tsvr.ap-southeast-1.rds.amazonaws.com --env REDISHOST=host.docker.internal --env REDISPORT=6379 --env DBNAME=PMD --env USER=admin --env PASS=Adminpassword --env JWTSECRET=devSecret --rm -p 9000:9000 mabutalid1/pmdapi:latest",
 		"up:prod": "docker run --name my-pmdapi --env HOST=pmd.c1wubughhknd.ap-southeast-1.rds.amazonaws.com --env REDISHOST=host.docker.internal --env REDISPORT=6379 --env DBNAME=PMD --env USER=MarcoMasterAdmin --env PASS=Ohmaasura123 --env JWTSECRET=prodSecretAllTimecultivation --rm -p 9000:9000 mabutalid1/pmdapi:latest",
 		"up:redis": "docker run --rm --name my-redis -p 6379:6379/tcp -d redis:latest",
