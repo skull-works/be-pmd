@@ -24,7 +24,8 @@ exports.authErrors = (err, next) => {
             throw(err);
     }
     catch(error){
-        next(error);
+        console.log(error);
+        return next(error);
     }
 } 
 

@@ -45,22 +45,20 @@ describe('Suite === Authentication Controller', function(){
                                 .send({ username: 'TestNameWrong', _csrf: csrf });
                 expect(res.statusCode).to.eq(403);
                 expect(res.body.error.message).to.eql('no user with this username');
-                // expect(res.statusCode).to.eq(200);
-                // expect(res.body.accessToken).not.to.be.empty;
             });
 
             it('User password is wrong should return error', async function(){
                 let res = await session.post('/login')
                                 .send({ username: user, password: 'WrongPassword', _csrf: csrf });
+
                 expect(res.statusCode).to.eq(403);
                 expect(res.body.error.message).to.eql('wrong password');
-                // expect(res.statusCode).to.eq(200);
-                // expect(res.body.accessToken).not.to.be.empty;
             });
             
             it('User credentials correct should return isLoggedIn true', async function(){
                 let res = await session.post('/login')
                                         .send({ username: user, password: userPassword, _csrf: csrf });
+
                 expect(res.statusCode).to.eq(200);
                 expect(res.body.isLoggedIn).to.be.true;
             });
@@ -72,24 +70,13 @@ describe('Suite === Authentication Controller', function(){
             it('logout successfuly should return "User is logged out"', async function(){
                 res = await session.post('/login')
                                    .send({ username: user, password: userPassword, _csrf: csrf });
+
                 let result = await session.get('/logout')
                                           .send({_csrf:csrf});
+
                 expect(result.statusCode).to.eq(200);
                 expect(result.body.logout).to.be.true;
-                expect(result.body.message).to.eql("User is logged out");
-            });
-
-            it('key not existing in redis should return User already logged out', async function(){
-                res = await session.post('/login')
-                                   .send({ username: user, password: userPassword, _csrf: csrf });
-                let result;
-                let isDel = await del(user);
-                if(isDel === 1){
-                    result = await session.get('/logout')
-                                          .send({_csrf:csrf});
-                }else
-                    console.log('error in test');
-                expect(result.body.message).to.eql("User already logged out");
+                expect(result.body.message).to.eql("User logged out");
             });
 
             it('token not existing in signedCookies should return User already logged out', async function(){
@@ -99,66 +86,6 @@ describe('Suite === Authentication Controller', function(){
             });
         });
     });
-
-    
-    context('isLoggedIn', function(){
-        
-        context('Cases', function(){
-
-            let key = "testAdmin2", userPassword = "testPassword2";
-
-            before(async function(){
-                //creating login user
-                await createLoginUser(key, userPassword);
-            })
-
-            beforeEach(async function(){
-                let { newSession, csurf } = await createSession();
-                csrf = csurf;
-                session = newSession;
-            });
-
-            it('No Cookie return message Not Logged In', async function(){
-                let res = await session.get('/isLoggedIn')
-                                       .send({ _csrf: csrf });
-                expect(res.body.message).to.eql('not logged in');
-            });
-
-            it('JWT token does not exist in redis server return 403 status code', async function(){
-                await Login(session, key, userPassword, csrf);
-                let res;
-                let isDel = await del(key); //remove token from redis server
-                if(isDel === 1){
-                    res = await session.get('/isLoggedIn')  //make request
-                                       .send({ _csrf: csrf });
-                }else
-                    console.log('error in test');
-                expect(res.statusCode).to.eq(403);
-                expect(res.body.error.message).to.eql('Session timed out, kindly login again');
-            });
-
-            it('JWT does not match redis token value', async function(){
-                await Login(session, key, userPassword, csrf);
-                let val = await set(key, 'testChangeValue', 'EX', 60);      //change redis value to force it not to be equal with jwt token
-                expect(val).to.eql('OK');
-
-                let res = await session.get('/isLoggedIn')     //make request
-                                       .send({ _csrf: csrf });
-                expect(res.statusCode).to.eq(403);
-                expect(res.body.error.message).to.eql('Login seems to be used already, kindly login ASAP and contact system administrator');
-            });
-
-            it('Passed all checking should generate new accessToken', async function(){
-                await Login(session, key, userPassword, csrf);
-                let res = await session.get('/isLoggedIn')
-                                        .send({_csrf: csrf});
-                expect(res.statusCode).to.eq(200);
-                expect(res.body.isLoggedIn).to.be.true;
-            });
-
-        });
-    });
-
 
     context('middleware for every request isAuth.js', function(){
         let key = "testAdmin3", userPassword = "testPassword3";
@@ -188,49 +115,76 @@ describe('Suite === Authentication Controller', function(){
             let { body, statusCode } = await session
                                             .get(`/application_form/2020-08-13/${dateNow}`)
                                             .send({_csrf:csrf});
-            expect(statusCode).to.eql(403);
-            expect(body.error.message).to.eql('not authenticated');
+            expect(statusCode).to.eql(401);
+            expect(body.message).to.eql('not authenticated');
         });
 
-        it('JWT csrf token does not match browser csrf token, should return invalid message', async function() {
-            await Login(session, key, userPassword, csrf);
-            const {  csurf } = await createSession();
-            let  diffCSRF = csurf;
-
-            let { body, statusCode } = await session
-                                            .get(`/application_form/2020-08-13/${dateNow}`)
-                                            .send({_csrf: diffCSRF});
-            expect(statusCode).to.eql(403);
-            expect(body.error.message).to.eql('Invalid browser token');
-        });
-
-        it('JWT token does not exist in redis server return 500 status code', async function() {
+        it('JWT token does not exist in redis server return 401 status code', async function() {
             await Login(session, key, userPassword, csrf);
             let res;
-            let isDel = await del(key); //remove token from redis server
+            let isDel = await del(`AccessToken#${key}`); //remove token from redis server
             if(isDel === 1){
                 res = await session
                             .get(`/application_form/2020-08-13/${dateNow}`)
                             .send({_csrf: csrf});
             }
-            expect(res.statusCode).to.eq(403);
-            expect(res.body.error.message).to.eql('Session timed out, kindly login again');
+            expect(res.statusCode).to.eq(401);
+            expect(res.body.message).to.eql('Session timed out, kindly login again');
         });
 
         it('JWT does not match redis token value', async function() {
             await Login(session, key, userPassword, csrf);
             let res;
-            let val = await set(key, 'testChangeValue', 'EX', 60);      //change redis value to force it not to be equal with jwt token
+            let val = await set(`AccessToken#${key}`, 'testChangeValue', 'EX', 60);      //change redis value to force it not to be equal with jwt token
             expect(val).to.eql('OK');
             //act
             res = await session
                         .get(`/application_form/2020-08-13/${dateNow}`)
                         .send({_csrf: csrf});
 
-            expect(res.statusCode).to.eq(403);
-            expect(res.body.error.message).to.eql('Login seems to be used already, kindly login ASAP and contact system administrator');
+            expect(res.statusCode).to.eq(401);
+            expect(res.body.message).to.eql('Access Token did not match!!!!');
         });
     });
 
+    context('IsStillAuthenticated', function(){
+        let key = "testAdmin3", userPassword = "testPassword3";
+        let dateNow = dateToday();
 
+        before(async function(){
+            //creating login user
+            await createLoginUser(key, userPassword);
+        })
+
+        beforeEach(async function(){
+            let { newSession, csurf } = await createSession();
+            csrf = csurf;
+            session = newSession;
+        });
+
+        it('should return authenticated is true', async function() {
+            await Login(session, key, userPassword, csrf);
+            let { body, statusCode } = await session
+                                            .get(`/isStillAuthenticated`)
+                                            .send({_csrf:csrf});
+            expect(statusCode).to.eql(200);
+            expect(body.authenticated).to.eql(true);
+            expect(body.message).to.eql("User is still authenticated");
+        });
+
+        it('should return sessioned time out and authenticated false', async function() {
+            await Login(session, key, userPassword, csrf);
+
+            await del(`AccessToken#${key}`);
+            await del(`RefreshToken#${key}`);
+
+            let { body, statusCode } = await session
+                                            .get(`/isStillAuthenticated`)
+                                            .send({_csrf:csrf});
+
+            expect(statusCode).to.eql(401);
+            expect(body.authenticated).to.eql(false);
+            expect(body.message).to.eql("Session timed out, kindly login again");
+        });
+    })
 })

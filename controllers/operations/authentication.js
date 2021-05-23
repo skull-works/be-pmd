@@ -1,10 +1,7 @@
 const jwt = require('jsonwebtoken');
-const momentZone = require('moment-timezone');
 const { promisify } = require('util');
-const moment = require('moment');
-const { authErrors } = require('../errors/errors');
-const { isClientValid } = require('../../controllers/redis/authClient');
-const { generateAccessToken } = require('../../controllers/operations/tokens');
+const { isClientValid } = require('../redis/authClient');
+const { generateAccessToken } = require('./tokens');
 const Logger = require('../../utility/logger');
 
 require('dotenv').config();
@@ -15,9 +12,7 @@ let refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
 
 let verifyToken = promisify(jwt.verify).bind(jwt);
 
-const currentTimeZone = momentZone.tz('Asia/Manila');
-
-const regenerateAccessTokenThroughValidatingRefreshToken = async (res, next, refreshToken) => {
+exports.regenerateAccessTokenThroughValidatingRefreshToken = async (res, refreshToken) => {
     Logger.info('=====[Function - regenerateAccessTokenThroughValidatingRefreshToken]=====');
     Logger.info('Creating new access token');
     try {
@@ -26,25 +21,28 @@ const regenerateAccessTokenThroughValidatingRefreshToken = async (res, next, ref
 
         // Verify refreshToken in redis
         const  { getValue, error } = await isClientValid(`RefreshToken#${verifyRefreshToken.name}`);
-        if (error) throw error;
+        if (error) {
+            Logger.info('Refresh Token not anymore in REDIS');
+            Logger.info('Unable to create new access token');
+            throw error;
+        }
         else if (getValue !== refreshToken) throw { authenticated: false, message: 'Refresh Token did not match!!!!' };
 
         // Generate New AccessToken
         await generateAccessToken({ name: verifyRefreshToken.name }, res);
 
-        Logger.info('User is Authenticated');
-        return next();
+        return res.status(200).json({ authenticated: true, message: 'User is still authenticated' });
     } catch (err) {
         if (err.toString() === 'TokenExpiredError: jwt expired') { 
             Logger.info('Unable to create new access token');
             Logger.info('Refresh Token Expired');
-            return res.status(401).json({authenticated: false, message:'Session timed out, kindly login again'});
+            return res.status(401).json({ authenticated: false, message:'Session timed out, kindly login again'});
         }
-        return res.status(401).json({authenticated: false, ...err });
+        return res.status(401).json({ authenticated: false, ...err });
     }
 }
 
-const validateCurrentAccessToken = async (accessToken) => {
+exports.validateCurrentAccessToken = async (accessToken) => {
     Logger.info('=====[Function - validateCurrentAccessToken]=====');
     Logger.info('Validating current access token')
     // Verify JWT AccessToken
@@ -58,25 +56,3 @@ const validateCurrentAccessToken = async (accessToken) => {
     Logger.info('Current access token valid');
     return { authenticated: true };
 }
-
-exports.isAuthenticated = async (req, res, next) => {
-    Logger.info('=====[Function - isAuthenticated]=====');
-    Logger.info('Authenticating');
-    if (req.signedCookies && req.signedCookies.accessToken) {
-        const accessToken = req.signedCookies.accessToken;
-        try {
-            const { authenticated } = await validateCurrentAccessToken(accessToken);
-            if (authenticated) {
-                Logger.info('User is Authenticated');
-                return next();
-            }
-        } catch (error) {
-            if (error.toString() === 'TokenExpiredError: jwt expired') {
-                const refreshToken = req.signedCookies.refresToken;
-                return regenerateAccessTokenThroughValidatingRefreshToken(res, next, refreshToken);
-            }
-            return res.status(401).json({authenticated: false, ...error});
-        }
-    }
-    return res.status(401).json({authenticated: false, message:'not authenticated'});
-};

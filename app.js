@@ -52,6 +52,9 @@ app.use(cors({
 
 
 //middleware routes
+app.use("/health", (req, res) => {
+    res.send({ success: true, message: "It is working" });
+})
 app.use(authRoutes);
 app.use(applicationRoutes);
 app.use(passbookRoutes);

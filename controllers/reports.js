@@ -1,5 +1,6 @@
 const { Op, literal } = require('sequelize');
 const moment = require('moment');
+const Logger = require('../utility/logger');
 //models
 const {
 	Application,
@@ -12,9 +13,9 @@ const {
 const { getDates } = require('./operations/reports');
 
 exports.getCalendarReport = async (req, res, next) => {
+	Logger.info('====[Function - getCalendarReport]====');
 	let { areaGroup, startDate, endDate } = req.params;
 	try {
-		console.log('API REQUEST: getCalendarReports ...');
 		let payments = await Application.findAll({
 			attributes: ['id', 'area_code', 'first_name', 'last_name', 'type_loan', 'status'],
 			include: [
@@ -52,10 +53,10 @@ exports.getCalendarReport = async (req, res, next) => {
 			let sendData = {};
 			sendData.allDates = getDates(startDate, endDate);
 			sendData.customerPayments = payments;
-			console.log('API REQUEST: returning response with data for getCalendarReports ...');
+			Logger.info('returning response with data for getCalendarReports ...');
 			return res.status(200).json(sendData);
 		}
-		console.log('API REQUEST: getCalendarReports no data found ...');
+		Logger.info('getCalendarReports no data found ...');
 		throw { message: 'no data found' };
 	} catch (err) {
 		next(err);
