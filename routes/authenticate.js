@@ -25,7 +25,11 @@ router.get(
  *        post:
  *          parameters:
  *            - name: username
- *              description: Sign up info
+ *              description: username to register for user
+ *              in: body
+ *              required: true
+ *            - name: password
+ *              description: password for user to register
  *              in: body
  *              required: true
  *          description: register user
@@ -61,21 +65,6 @@ router.post(
 
 /**
  * @swagger
- * /isLoggedIn:
- *        post:
- *          description: Check if user still logged in and generate new Access Token
- *          responses:
- *              '200':
- *                description: generate new Access Token if User still Logged In
- */
-router.get(
-    '/isLoggedIn',
-    authController.isLoggedIn
-);
-
-
-/**
- * @swagger
  * /logout:
  *        post:
  *          parameters:
@@ -91,6 +80,21 @@ router.get(
 router.get(
     '/logout',
     authController.willLogout
+)
+
+
+/**
+ * @swagger
+ * /isStillAuthenticated:
+ *        post:
+ *          description: Request to check if user is still authenticated
+ *          responses:
+ *              '200':
+ *                description: user is still authenticated
+ */
+ router.get(
+    '/isStillAuthenticated',
+    authController.isStillAuthenticated
 )
 
 
