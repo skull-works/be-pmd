@@ -1,13 +1,18 @@
-//npm packages
+// npm packages
 const express = require('express');
-//controllers
+
+// controllers
 const applicationController = require('../controllers/application');
-//middlewares
+
+// middlewares
 const applicationValidator = require('../middleware/validation/application');
 const { isAuthenticated } = require('../middleware/authentication/isAuth');
-//errors
+const { CheckCutoff } = require('../middleware/authentication/cutOff');
+
+// errors
 const Errors = require('../middleware/errors/errors');
-//initialize express router
+
+// initialize express router
 const router = express.Router();
 
 
@@ -28,6 +33,7 @@ const router = express.Router();
  */
 router.post(
     '/application_form',
+    CheckCutoff,
     isAuthenticated,
     applicationValidator.appNamesCodeInput,
     applicationValidator.CapitalizeNamesCodeInput,
@@ -63,6 +69,7 @@ router.post(
  */
 router.get(
     '/application_form/:start_date/:end_date',
+    CheckCutoff,
     isAuthenticated,
     applicationValidator.jsonParse,
     applicationValidator.appGetApplicationInput,
@@ -91,6 +98,7 @@ router.get(
  */
 router.get(
     '/application_form-details/:area_code/:formId',
+    CheckCutoff,
     isAuthenticated,
     applicationValidator.getApplicationInputDetails,
     Errors.errorValidation,
@@ -121,6 +129,7 @@ router.get(
   */   
 router.put(
     '/application_form',
+    CheckCutoff,
     isAuthenticated,
     applicationValidator.getApplicationInputUpdate,
     Errors.errorValidation,

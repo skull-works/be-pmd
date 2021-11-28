@@ -1,9 +1,10 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 
-//middlewares
+// middlewares
 const { CheckCutoff } = require('../middleware/authentication/cutOff');
 
+// initialize express router
 const router = express.Router();
 
 
@@ -42,6 +43,7 @@ router.get(
  */
 router.post(
     '/sign-up',
+    CheckCutoff,
     authController.signUp
 );
 
@@ -98,6 +100,7 @@ router.get(
  */
  router.get(
     '/isStillAuthenticated',
+    CheckCutoff,
     authController.isStillAuthenticated
 )
 

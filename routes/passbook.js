@@ -1,11 +1,17 @@
-//npm packages
+// npm packages
 const express = require('express');
-const router = express.Router();
+
+// controllers
 const passbookController = require('../controllers/passbook');
+
+// middlewares
 const passbookValidation = require('../middleware/validation/passbook');
 const { errorValidation } = require('../middleware/errors/errors');
 const { isAuthenticated } = require('../middleware/authentication/isAuth');
+const { CheckCutoff } = require('../middleware/authentication/cutOff');
 
+// initialize express router
+const router = express.Router();
 
 /**
  * @swagger
@@ -23,6 +29,7 @@ const { isAuthenticated } = require('../middleware/authentication/isAuth');
  */
 router.post(
     '/passbook',
+    CheckCutoff,
     isAuthenticated,
     passbookValidation.postBodyPassbook,
     passbookValidation.passbookCheck,
@@ -47,6 +54,7 @@ router.post(
  */
 router.post(
     '/passbook-item',
+    CheckCutoff,
     isAuthenticated,
     passbookValidation.postBodyPassbookItems,
     errorValidation,
@@ -73,6 +81,7 @@ router.post(
  */
 router.get(
     '/passbook-item/:formId',
+    CheckCutoff,
     isAuthenticated,
     passbookValidation.getParamsPassbookItems,
     errorValidation,
@@ -116,10 +125,11 @@ router.get(
  */
 router.delete(
     '/passbook-item/:id/:formId/:collection/:dates_paid',
-     isAuthenticated,
-     passbookValidation.deleteParamsPassbookItems,
-     errorValidation,
-     passbookController.delPassbookItem
+    CheckCutoff,
+    isAuthenticated,
+    passbookValidation.deleteParamsPassbookItems,
+    errorValidation,
+    passbookController.delPassbookItem
 );
 
 

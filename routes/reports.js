@@ -1,7 +1,14 @@
 const express = require('express');
-const router = express.Router();
+
+// controllers
 const reportsController = require('../controllers/reports');
+
+// middlewares
 const { isAuthenticated } = require('../middleware/authentication/isAuth');
+const { CheckCutoff } = require('../middleware/authentication/cutOff');
+
+// initialize express router
+const router = express.Router();
 
 
 
@@ -28,7 +35,8 @@ const { isAuthenticated } = require('../middleware/authentication/isAuth');
  *                          description: Fetched Successfuly
  */
 router.get(
-    '/calendarReport/:areaGroup/:startDate/:endDate', 
+    '/calendarReport/:areaGroup/:startDate/:endDate',
+    CheckCutoff,
     isAuthenticated,
     reportsController.getCalendarReport
 );
@@ -57,7 +65,8 @@ router.get(
  *                          description: Fetched Successfuly
  */
 router.get(
-    '/GraphReport/:areaGroup/:startDate/:endDate', 
+    '/GraphReport/:areaGroup/:startDate/:endDate',
+    CheckCutoff,
     isAuthenticated,
     reportsController.getCashInflowOutflow
 );
@@ -73,6 +82,7 @@ router.get(
  */
 router.get(
     '/logs',
+    CheckCutoff,
     isAuthenticated,
     reportsController.getLogs
 );
