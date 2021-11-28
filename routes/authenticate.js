@@ -43,7 +43,6 @@ router.get(
  */
 router.post(
     '/sign-up',
-    CheckCutoff,
     authController.signUp
 );
 
@@ -64,7 +63,6 @@ router.post(
  */
 router.post(
     '/login',
-    CheckCutoff,
     authController.Login
 );
 
