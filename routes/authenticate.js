@@ -1,6 +1,9 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 
+//middlewares
+const { CheckCutoff } = require('../middleware/authentication/cutOff');
+
 const router = express.Router();
 
 
@@ -59,6 +62,7 @@ router.post(
  */
 router.post(
     '/login',
+    CheckCutoff,
     authController.Login
 );
 
