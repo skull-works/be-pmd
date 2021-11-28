@@ -16,9 +16,6 @@ exports.CheckCutoff = (_req, _res, next) => {
     const currentHour = currentTimeZone.hour();
     const currentMinute = currentTimeZone.minute();
 
-    console.log(currentHour);
-    console.log(currentMinute);
-
     if (currentHour < cutOffStartPeriodHour) {
         Logger.info('Access Not Allowed - current time does not meet the cut off start period - hour stage');
         throw { authenticated: false, message: 'ACCESS DENIED - WAIT FOR 8am' };
