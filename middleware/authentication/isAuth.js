@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken');
-const momentZone = require('moment-timezone');
 const { promisify } = require('util');
-const moment = require('moment');
 const { authErrors } = require('../errors/errors');
 const { isClientValid } = require('../../controllers/redis/authClient');
 const { generateAccessToken } = require('../../controllers/operations/tokens');
@@ -14,8 +12,6 @@ let accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
 let refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
 
 let verifyToken = promisify(jwt.verify).bind(jwt);
-
-const currentTimeZone = momentZone.tz('Asia/Manila');
 
 const regenerateAccessTokenThroughValidatingRefreshToken = async (res, next, refreshToken) => {
     Logger.info('=====[Function - regenerateAccessTokenThroughValidatingRefreshToken]=====');

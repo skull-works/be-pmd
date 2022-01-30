@@ -7,7 +7,7 @@ const { removeClient } = require('./redis/authClient');
 const { authErrors } = require('../middleware/errors/errors');
 const { User } = require('../models/index');
 const { promisify } = require('util');
-const { validateCurrentAccessToken, regenerateAccessTokenThroughValidatingRefreshToken } = require('./operations/authentication');
+const { validateCurrentAccessToken, regenerateAccessTokenThroughValidatingRefreshToken, CheckCutoffOperation } = require('./operations/authentication');
 const Logger = require('../utility/logger');
 
 require('dotenv').config();
@@ -50,13 +50,14 @@ exports.Login = async (req, res, next) => {
         // Step 1 Extract user from database
         let user = await User.findOne({ where:{ username: username }});
         if(!user) throw({message: 'no user with this username', statusCode: 403});
-        
+
+        if (!CheckCutoffOperation(user.authority, res)) return;
+
         // Step 2 compare input password to password from database
         let doMatch = await bcrypt.compare(password, user.password);
         if(!doMatch) throw ({message: 'wrong password', statusCode: 403});
-
         // Step 3 create jwt token
-        let token = { name: username };
+        let token = { name: username, authority: user.authority };
         let accessToken = await generateAccessToken(token, res);
         let refreshToken = await generateRefreshToken(token, res);
  
