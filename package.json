@@ -47,7 +47,7 @@
 		"chai": "^4.2.0",
 		"decache": "^4.6.0",
 		"env-cmd": "^8.0.2",
-		"mocha": "^8.1.1",
+		"mocha": "^8.4.0",
 		"mochawesome": "^6.1.1",
 		"mochawesome-report-generator": "^5.1.0",
 		"nodemon": "^2.0.4",
